@@ -64,3 +64,6 @@ repo = 'kannokanno/previm'
 
 [[plugins]]
 repo = 'rizzatti/dash.vim'
+
+[[plugins]]
+repo = 'kien/ctrlp.vim'
