@@ -1,0 +1,15 @@
+root = true
+
+[*]
+ndent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.php]
+indent_size = 4
+
+[*.md]
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = false

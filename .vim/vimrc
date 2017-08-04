@@ -1,0 +1,282 @@
+"===================================================================
+" Basic settings
+"===================================================================
+set nocompatible "vi互換モードを無効化
+filetype off "ファイルタイプ自動検出を一旦無効化
+syntax on "シンタックスハイライト有効
+set nofixeol
+set ambiwidth=double
+set splitbelow "垂直分割時、ウインドウを下に分割
+set splitright "水平分割時、ウインドウを右に分割
+set nostartofline "行の移動時、行頭に移動しない
+set confirm "バッファが変更されている時、コマンドエラーではなく確認を返す
+set visualbell "ビープ音の代わりに画面フラッシュを使用する
+set t_vb= "画面フラッシュも無効にする
+set mouse=a "全モードでマウス有効化
+set clipboard=unnamed "クリップボードからコピーできるようにする
+set wildmode=list:longest,full "tabで確定部分まで入力、リストを表示してtabでトグル
+set hidden "バッファを保存せずに新しいバッファを開く
+set backspace=indent,eol,start "BSでインデント、改行、挿入モード開始位置以前の文字を削除可能にする
+set noswapfile "swapファイルを作成しない
+set nobackup "バックアップファイルを作成しない
+set notitle
+set noundofile "アンドゥファイルを作成しない"
+map ¥ <leader>
+set clipboard=unnamed
+set textwidth=0
+autocmd FileType text setlocal textwidth=0
+packadd! matchit
+
+"===================================================================
+" Charset
+"===================================================================
+set encoding=utf-8
+scriptencoding utf-8
+set fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,sjis,euc-jp,latin1 "日本語自動識別用設定
+
+
+"===================================================================
+" Indentation
+"===================================================================
+set autoindent
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set softtabstop=2
+
+"===================================================================
+" Search
+"===================================================================
+set ignorecase "大文字小文字を区別せずに検索
+set smartcase "大文字が含まれているときは区別して検索する
+set incsearch "インクリメンタルサーチを有効化
+set hlsearch "検索結果をハイライト
+set wrapscan "最後まで検索したら一番上に戻る
+set showcmd "入力中のコマンドを最下行に表示
+
+"===================================================================
+" Appearance
+"===================================================================
+set t_ut=
+set t_Co=256 "端末の色数を256色に設定
+set number "行番号を表示
+set ruler "ルーラー表示
+set laststatus=2 "ステータスラインを常に表示
+set list "不可視文字を表示する
+set colorcolumn=80 "80文字目に目印
+set listchars=tab:>-,nbsp:S,trail:-,eol:↲ "不可視文字の設定内容
+set cmdheight=2 "コマンド行の高さを2行に設定
+let g:rehash256 = 1
+set background=dark
+
+"===================================================================
+" Syntax highlighting
+"===================================================================
+"JSONのダブルクオーテーションマークを表示する
+autocmd Filetype json setl conceallevel=0
+".jsファイルでもJSXをハイライト
+let g:jsx_ext_required = 0
+
+"markdownファイルでconceal無効化
+let g:vim_markdown_conceal = 0
+autocmd Filetype markdown setl conceallevel=0
+
+"===================================================================
+" Key bidings
+"===================================================================
+"ESCで検索ハイライトを消す
+nmap <Esc><Esc> :nohlsearch<CR><Esc>
+"タグジャンプの候補が複数ある場合はリストを出す
+nnoremap <C-]> g<C-]>
+
+"xで削除した文字をヤンクしない
+nnoremap x "_x
+
+"括弧やクォートの補完
+"inoremap { {}<Left>
+"inoremap {<Enter> {}<Left><CR><ESC><S-o>
+"inoremap ( ()<Left>
+"inoremap (<Enter> ()<Left><CR><ESC><S-o>
+"inoremap [ []<Left>
+"inoremap [<Enter> []<Left><CR><ESC><S-o>
+"inoremap ' ''<Left>
+"inoremap " ""<Left>
+
+"===================================================================
+" PHP Development
+"===================================================================
+" 文字列中のSQLをハイライト
+let php_sql_query           = 1
+" Baselibメソッドのハイライト
+let php_baselib             = 1
+" 文字列中のHTMLをハイライト
+let php_htmlInStrings       = 1
+" <? をハイライト除外にする
+let php_noShortTags         = 1
+" カッコが閉じていない場合にハイライト
+let php_parent_error_close  = 1
+
+" SQLのシンタックスハイライトをMySQLにする
+let g:sql_type_default = 'mysql'
+
+
+"===================================================================
+"dein.vim
+"===================================================================
+" required:
+set runtimepath+=~/.vim/bundles/repos/github.com/shougo/dein.vim
+
+" required:
+if dein#load_state('~/.vim/bundles')
+  call dein#begin('~/.vim/bundles')
+
+  let  s:toml = '~/.vim/dein.toml'
+
+  call dein#load_toml(s:toml, {'lazy': 0})
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+if dein#check_install()
+  call dein#install()
+endif
+
+"カラースキームはcall dein#end()の後で設定する必要がある
+colorscheme solarized
+"80文字目のラインの色を変更
+highlight ColorColumn ctermbg=38
+
+"===================================================================
+"NERD Tree
+"===================================================================
+nnoremap <silent><leader>n :NERDTreeToggle<CR>
+let NERDTreeMapActivateNode='<space>'
+
+"===================================================================
+"Lightline.vim
+"===================================================================
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component': {
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+      \ },
+      \ 'component_visible_condition': {
+      \   'readonly': '(&filetype!="help"&& &readonly)',
+      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+      \ },
+      \ 'separator': { 'left': '', 'right': '' }
+      \ }
+
+"===================================================================
+"Neosnippet.vim
+"===================================================================
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+"===================================================================
+"Neocmplete.vim
+"===================================================================
+"Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions',
+    \ 'ruby' : $HOME.'/.vim/dict/ruby.dict',
+    \ 'php' : $HOME.'/.vim/dict/php.dict'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  " For no inserting <CR> key.
+  return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+" g:quickrun_config の初期化
+if !exists("g:quickrun_config")
+    let g:quickrun_config={}
+endif
+
+"===================================================================
+"Watchdogs
+"===================================================================
+nnoremap <silent> <buffer> <Leader>w :<C-u>WatchdogsRun<CR>
+
+let g:quickrun_config["ruby/watchdogs_checker"] = {
+  \ "type" : "watchdogs_checker/rubocop"
+  \}
+
+let g:quickrun_config["php/watchdogs_checker"] = {
+  \ "type" : "watchdogs_checker/phpcs",
+  \ "cmdopt" : "--standard=psr2"
+  \}
+
+call watchdogs#setup(g:quickrun_config)
+
+
+"===================================================================
+" Previm
+"===================================================================
+let g:previm_open_cmd = "open -a \"Google Chrome\""
+augroup PrevimSettings
+  autocmd!
+  autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+augroup END
