@@ -62,6 +62,14 @@ function peco-select-history() {
 zle -N peco-select-history
 bindkey '^r' peco-select-history
 
+# メモディレクトリをgrepしてvimで開く
+function fmemo() {
+  file=$(grep -srnIH $@ ~/Notes | sort -r | peco --query "$LBUFFER" | awk -F : '{print "-c" $2 " " $1}')
+  if [ -n "$file" ]; then
+    eval "vim $file"
+  fi
+}
+
 # tmuxのwindowをカレントディレクトリorリポジトリ名に変更
 function rename-tmux-window() {
   if [ -n "$TMUX" ]; then
