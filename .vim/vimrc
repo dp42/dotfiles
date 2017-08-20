@@ -28,7 +28,6 @@ autocmd FileType text setlocal textwidth=0
 packadd! matchit
 set grepprg=grep\ -srnIH\ --exclude-dir=.git
 au QuickfixCmdPost make,grep,grepadd,vimgrep copen
-
 "===================================================================
 " Charset
 "===================================================================
@@ -94,8 +93,6 @@ nnoremap <C-]> g<C-]>
 nnoremap x "_x
 " jjでエスケープ
 inoremap <silent> jj <ESC>
-" 日本語入力で”っj”と入力してもEnterキーで確定させればインサートモードを抜ける
-inoremap <silent> っj <ESC>
 "括弧やクォートの補完
 "inoremap { {}<Left>
 "inoremap {<Enter> {}<Left><CR><ESC><S-o>
