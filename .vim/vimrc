@@ -84,16 +84,18 @@ let g:vim_markdown_conceal = 0
 autocmd Filetype markdown setl conceallevel=0
 
 "===================================================================
-" Key bidings
+" Key bindings
 "===================================================================
 "ESCで検索ハイライトを消す
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 "タグジャンプの候補が複数ある場合はリストを出す
 nnoremap <C-]> g<C-]>
-
 "xで削除した文字をヤンクしない
 nnoremap x "_x
-
+" jjでエスケープ
+inoremap <silent> jj <ESC>
+" 日本語入力で”っj”と入力してもEnterキーで確定させればインサートモードを抜ける
+inoremap <silent> っj <ESC>
 "括弧やクォートの補完
 "inoremap { {}<Left>
 "inoremap {<Enter> {}<Left><CR><ESC><S-o>
