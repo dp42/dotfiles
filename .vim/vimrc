@@ -26,7 +26,7 @@ set clipboard=unnamed
 set textwidth=0
 autocmd FileType text setlocal textwidth=0
 packadd! matchit
-set grepprg=grep\ -srnIH\ --exclude-dir=.git
+set grepprg=grep\ -srnIH\ --exclude-dir=.git\ --exclude=tags
 au QuickfixCmdPost make,grep,grepadd,vimgrep copen
 "===================================================================
 " Charset
