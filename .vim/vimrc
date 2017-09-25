@@ -33,7 +33,7 @@ au QuickfixCmdPost make,grep,grepadd,vimgrep copen
 "===================================================================
 set encoding=utf-8
 scriptencoding utf-8
-set fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,sjis,euc-jp,latin1 "日本語自動識別用設定
+set fileencodings=ucs-bom,utf-8,iso-2022-jp,euc-jp,cp932,sjis,latin1 "日本語自動識別用設定
 
 
 "===================================================================
@@ -158,6 +158,7 @@ highlight ColorColumn ctermbg=38
 "===================================================================
 nnoremap <silent><leader>n :NERDTreeToggle<CR>
 let NERDTreeMapActivateNode='<space>'
+let NERDTreeShowHidden = 1
 
 "===================================================================
 "Lightline.vim
