@@ -65,7 +65,7 @@ set ruler "ルーラー表示
 set laststatus=2 "ステータスラインを常に表示
 set list "不可視文字を表示する
 set colorcolumn=80 "80文字目に目印
-set listchars=tab:>-,nbsp:S,trail:-,eol:↲ "不可視文字の設定内容
+set listchars=tab:>-,trail:-,eol:↲ "不可視文字の設定内容
 set cmdheight=2 "コマンド行の高さを2行に設定
 let g:rehash256 = 1
 set background=dark
@@ -283,3 +283,8 @@ augroup PrevimSettings
   autocmd!
   autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 augroup END
+
+"===================================================================
+" VimDevIcons
+"===================================================================
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1

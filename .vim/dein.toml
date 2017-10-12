@@ -66,10 +66,16 @@ repo = 'kannokanno/previm'
 repo = 'rizzatti/dash.vim'
 
 [[plugins]]
-repo = 'kien/ctrlp.vim'
+repo = 'ctrlpvim/ctrlp.vim'
 
 [[plugins]]
 repo = 'joonty/vdebug'
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
