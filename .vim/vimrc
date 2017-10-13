@@ -5,7 +5,7 @@ set nocompatible "vi互換モードを無効化
 filetype off "ファイルタイプ自動検出を一旦無効化
 syntax on "シンタックスハイライト有効
 set nofixeol
-set ambiwidth=double
+set ambiwidth=single
 set splitbelow "垂直分割時、ウインドウを下に分割
 set splitright "水平分割時、ウインドウを右に分割
 set nostartofline "行の移動時、行頭に移動しない
@@ -65,7 +65,7 @@ set ruler "ルーラー表示
 set laststatus=2 "ステータスラインを常に表示
 set list "不可視文字を表示する
 set colorcolumn=80 "80文字目に目印
-set listchars=tab:>-,nbsp:S,trail:-,eol:↲ "不可視文字の設定内容
+set listchars=tab:>-,trail:-,eol:↲ "不可視文字の設定内容
 set cmdheight=2 "コマンド行の高さを2行に設定
 let g:rehash256 = 1
 set background=dark
@@ -172,14 +172,15 @@ let g:lightline = {
       \ 'component': {
       \   'readonly': '%{&filetype=="help"?"":&readonly?"":""}',
       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+      \   'fugitive': '%{exists("*fugitive#head") && ""!=fugitive#head()?"\uE0A0 " . fugitive#head():""}'
       \ },
       \ 'component_visible_condition': {
       \   'readonly': '(&filetype!="help"&& &readonly)',
       \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
       \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
       \ },
-      \ 'separator': { 'left': '', 'right': '' }
+      \ 'separator': { 'left': "\uE0B0", 'right': "\uE0B2" },
+      \ 'subseparator': { 'left': "\uE0B1", 'right': "\uE0B3" }
       \ }
 
 "===================================================================
@@ -287,3 +288,8 @@ augroup END
 "Dash.vim
 "===================================================================
 nmap <silent> <leader>d <Plug>DashSearch
+
+"===================================================================
+" VimDevIcons
+"===================================================================
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
