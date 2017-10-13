@@ -34,7 +34,7 @@ alias ls='ls --color=auto'
 alias ll='ls -al'
 alias -g B='`git branch | peco | sed -e "s/^\*[ ]*//g"`'
 alias memo='vim ~/Notes/$(date +%Y/%Y-%m-%d.md)'
-
+alias memof=find_memo
 # gitのリポジトリ名を取得
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' formats '%r'
@@ -63,7 +63,7 @@ zle -N peco-select-history
 bindkey '^r' peco-select-history
 
 # メモディレクトリをgrepしてvimで開く
-function fmemo() {
+function find_memo() {
   file=$(grep -srnIH $@ ~/Notes | sort -r | peco --query "$LBUFFER" | awk -F : '{print "-c" $2 " " $1}')
   if [ -n "$file" ]; then
     eval "vim $file"
