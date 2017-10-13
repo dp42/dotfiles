@@ -77,5 +77,3 @@ repo = 'airblade/vim-gitgutter'
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
 
-[[plugins]]
-repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
