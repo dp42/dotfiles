@@ -151,7 +151,7 @@ endif
 "カラースキームはcall dein#end()の後で設定する必要がある
 colorscheme solarized
 "80文字目のラインの色を変更
-highlight ColorColumn ctermbg=38
+highlight ColorColumn ctermbg=24
 
 "===================================================================
 "NERD Tree
