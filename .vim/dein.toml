@@ -77,3 +77,9 @@ repo = 'airblade/vim-gitgutter'
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
 
+[[plugins]]
+repo = 'godlygeek/tabular'
+
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
+
