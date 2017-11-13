@@ -293,3 +293,8 @@ nmap <silent> <leader>d <Plug>DashSearch
 " VimDevIcons
 "===================================================================
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+
+"===================================================================
+" Vim Markdown
+"===================================================================
+let g:vim_markdown_folding_disabled = 1
