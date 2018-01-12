@@ -33,7 +33,8 @@ setopt nolistbeep
 alias ls='ls --color=auto'
 alias ll='ls -al'
 alias -g B='`git branch | peco | sed -e "s/^\*[ ]*//g"`'
-alias memo='vim ~/Notes/$(date +%Y/%Y-%m-%d.md)'
+alias diary='vim ~/Diary/$(date +%Y/diary-%Y-%m-%d.md)'
+alias memo='vim ~/Notes/$(date +%Y-%m-%d.md)'
 alias memof=find_memo
 # gitのリポジトリ名を取得
 autoload -Uz vcs_info
