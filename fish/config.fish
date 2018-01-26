@@ -1,5 +1,5 @@
-# Set shell
 set -gx SHELL /usr/local/bin/fish
+set -gx EDITOR vim
 
 # Set paths
 rbenv init - | source
