@@ -36,9 +36,20 @@ alias -g B='`git branch | peco | sed -e "s/^\*[ ]*//g"`'
 alias diary='vim ~/Diary/$(date +%Y/diary-%Y-%m-%d.md)'
 # alias memo='vim ~/Notes/$(date +%Y-%m-%d.md)'
 alias memof=find_memo
-# gitのリポジトリ名を取得
+
+# Prompt
+PROMPT='%F{cyan}[%n@%m] $ %f'
+RPROMPT="%F{blue}[%~]%f"
+
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' formats '%r'
+setopt prompt_subst
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
+zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
+zstyle ':vcs_info:*' formats "%F{green}%c%u(%b)%f"
+zstyle ':vcs_info:*' actionformats '(%b|%a)'
+precmd () { vcs_info }
+RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 
 #
 # Peco functions
@@ -83,17 +94,11 @@ function find_memo() {
   fi
 }
 
-# tmuxのwindowをカレントディレクトリorリポジトリ名に変更
+# tmuxのwindow名をカレントディレクトリに変更
 function rename-tmux-window() {
   if [ -n "$TMUX" ]; then
-    vcs_info
-    if [ -n "${vcs_info_msg_0_}" ]; then
-      current_repo=${vcs_info_msg_0_}
-      tmux rename-window $current_repo
-    else
-      current_dir=${PWD:t}
-      tmux rename-window $current_dir
-    fi
+    current_dir=${PWD:t}
+    tmux rename-window $current_dir
   fi
 }
 
