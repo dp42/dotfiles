@@ -83,3 +83,5 @@ repo = 'godlygeek/tabular'
 [[plugins]]
 repo = 'plasticboy/vim-markdown'
 
+[[plugins]]
+repo = 'w0ng/vim-hybrid'

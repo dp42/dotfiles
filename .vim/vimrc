@@ -149,10 +149,12 @@ if dein#check_install()
 endif
 
 "カラースキームはcall dein#end()の後で設定する必要がある
-colorscheme solarized
+let g:hybrid_custom_term_colors = 1
+colorscheme hybrid
 "80文字目のラインの色を変更
 highlight ColorColumn ctermbg=24
-
+"行番号の色を変更
+highlight LineNr ctermfg=250
 "===================================================================
 "NERD Tree
 "===================================================================
@@ -164,7 +166,7 @@ let NERDTreeShowHidden = 1
 "Lightline.vim
 "===================================================================
 let g:lightline = {
-      \ 'colorscheme': 'solarized',
+      \ 'colorscheme': 'jellybeans',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
