@@ -1,0 +1,8 @@
+{
+    "Style": {
+        "Basic": ["on_default", "default"],
+        "Selected": ["underline", "on_cyan", "black"],
+        "Query": ["cyan", "bold"],
+        "Matched": ["red"]
+    }
+}

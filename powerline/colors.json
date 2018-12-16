@@ -1,0 +1,13 @@
+{
+	"colors": {
+    "iceberg:base0" : 235,
+    "iceberg:base1" : 252,
+    "iceberg:base2" : 242,
+    "iceberg:red" : 203,
+    "iceberg:green" : 150,
+    "iceberg:yellow" : 216,
+    "iceberg:blue" : 110,
+    "iceberg:magenta" : 140,
+    "iceberg:cyan" : 109
+	}
+}

@@ -5,7 +5,23 @@ repo = 'Shougo/dein.vim'
 repo = 'Shougo/vimshell'
 
 [[plugins]]
-repo = 'Shougo/neocomplete'
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+hook_add = '''
+let g:deoplete#enable_at_startup = 1
+'''
 
 [[plugins]]
 repo = 'Shougo/neosnippet.vim'
@@ -14,50 +30,34 @@ repo = 'Shougo/neosnippet.vim'
 repo = 'Shougo/neosnippet-snippets'
 
 [[plugins]]
-repo = 'altercation/vim-colors-solarized'
-
-[[plugins]]
-repo = 'tomasr/molokai'
-
-[[plugins]]
-repo = 'itchyny/lightline.vim'
-
-[[plugins]]
 repo = 'tpope/vim-fugitive'
 
 [[plugins]]
 repo = 'editorconfig/editorconfig-vim'
 
 [[plugins]]
+repo = 'cohama/lexima.vim'
+
+[[plugins]]
+repo = 'majutsushi/tagbar'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
 repo = 'scrooloose/nerdtree'
 
 [[plugins]]
-repo = 'thinca/vim-quickrun'
+repo = 'ryanoasis/vim-devicons'
 
 [[plugins]]
-repo = 'Shougo/vimproc.vim'
-build = 'make'
+repo = 'itchyny/lightline.vim'
 
 [[plugins]]
-repo = 'osyo-manga/shabadou.vim'
+repo = 'w0ng/vim-hybrid'
 
 [[plugins]]
-repo = 'jceb/vim-hier'
-
-[[plugins]]
-repo = 'pangloss/vim-javascript'
-
-[[plugins]]
-repo = 'mxw/vim-jsx'
-
-[[plugins]]
-repo = 'tpope/vim-rails'
-
-[[plugins]]
-repo = 'osyo-manga/vim-watchdogs'
-
-[[plugins]]
-repo = 'vimtaku/hl_matchit.vim.git'
+repo = 'cocopon/iceberg.vim'
 
 [[plugins]]
 repo = 'kannokanno/previm'
@@ -67,15 +67,11 @@ repo = 'rizzatti/dash.vim'
 
 [[plugins]]
 repo = 'ctrlpvim/ctrlp.vim'
-
-[[plugins]]
-repo = 'joonty/vdebug'
-
-[[plugins]]
-repo = 'airblade/vim-gitgutter'
-
-[[plugins]]
-repo = 'ryanoasis/vim-devicons'
+hook_add = '''
+let g:ctrlp_show_hidden = 1
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.jpg
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store'
+'''
 
 [[plugins]]
 repo = 'godlygeek/tabular'
@@ -84,4 +80,27 @@ repo = 'godlygeek/tabular'
 repo = 'plasticboy/vim-markdown'
 
 [[plugins]]
-repo = 'w0ng/vim-hybrid'
+repo = 'soramugi/auto-ctags.vim'
+
+[[plugins]]
+repo = 'autozimu/LanguageClient-neovim'
+rev = 'next'
+build = 'bash install.sh'
+
+[[plugins]]
+repo = 'w0rp/ale'
+hook_add = '''
+let g:ale_sign_column_always = 1
+let g:ale_linters = {
+\   'ruby': ['rubocop'],
+\   'php': ['phpcs'],
+\   'javascript': ['standard'],
+\   'go': ['gometalinter', 'gofmt'],
+\}
+let g:ale_fixers = {
+\   'javascript': ['standard'],
+\   'go': ['gofmt']
+\}
+let g:ale_php_phpcs_standard = 'PSR2'
+let g:ale_go_gometalinter_options = '--fast'
+'''

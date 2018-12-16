@@ -1,0 +1,1 @@
+/Users/koichi/.config/fisherman/bobthefish/fish_title.fish

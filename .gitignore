@@ -1,2 +1,5 @@
 .vim/bundles/
 .vim/.netrwhist
+
+# fish shell
+fishd.*

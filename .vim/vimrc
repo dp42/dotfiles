@@ -21,6 +21,7 @@ set noswapfile "swapファイルを作成しない
 set nobackup "バックアップファイルを作成しない
 set notitle
 set noundofile "アンドゥファイルを作成しない"
+set completeopt=menuone "補完の結果をプレビューさせない
 map ¥ <leader>
 set clipboard=unnamed
 set textwidth=0
@@ -28,6 +29,8 @@ autocmd FileType text setlocal textwidth=0
 packadd! matchit
 set grepprg=grep\ -srnIH\ --exclude-dir=.git\ --exclude=tags
 au QuickfixCmdPost make,grep,grepadd,vimgrep copen
+
+
 "===================================================================
 " Charset
 "===================================================================
@@ -45,6 +48,7 @@ set shiftwidth=2
 set expandtab
 set softtabstop=2
 
+
 "===================================================================
 " Search
 "===================================================================
@@ -55,11 +59,11 @@ set hlsearch "検索結果をハイライト
 set wrapscan "最後まで検索したら一番上に戻る
 set showcmd "入力中のコマンドを最下行に表示
 
+
 "===================================================================
 " Appearance
 "===================================================================
 set t_ut=
-set t_Co=256 "端末の色数を256色に設定
 set number "行番号を表示
 set ruler "ルーラー表示
 set laststatus=2 "ステータスラインを常に表示
@@ -67,8 +71,6 @@ set list "不可視文字を表示する
 set colorcolumn=80 "80文字目に目印
 set listchars=tab:>-,trail:-,eol:↲ "不可視文字の設定内容
 set cmdheight=2 "コマンド行の高さを2行に設定
-let g:rehash256 = 1
-set background=dark
 
 "===================================================================
 " Syntax highlighting
@@ -93,21 +95,12 @@ nnoremap <C-]> g<C-]>
 nnoremap x "_x
 " jjでエスケープ
 inoremap <silent> jj <ESC>
-"括弧やクォートの補完
-"inoremap { {}<Left>
-"inoremap {<Enter> {}<Left><CR><ESC><S-o>
-"inoremap ( ()<Left>
-"inoremap (<Enter> ()<Left><CR><ESC><S-o>
-"inoremap [ []<Left>
-"inoremap [<Enter> []<Left><CR><ESC><S-o>
-"inoremap ' ''<Left>
-"inoremap " ""<Left>
 
 "===================================================================
 " PHP Development
 "===================================================================
 " 文字列中のSQLをハイライト
-let php_sql_query           = 1
+"let php_sql_query           = 1
 " Baselibメソッドのハイライト
 let php_baselib             = 1
 " 文字列中のHTMLをハイライト
@@ -132,8 +125,10 @@ if dein#load_state('~/.vim/bundles')
   call dein#begin('~/.vim/bundles')
 
   let  s:toml = '~/.vim/dein.toml'
+  let  s:lazy_toml = '~/.vim/dein_lazy.toml'
 
   call dein#load_toml(s:toml, {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
   " Required:
   call dein#end()
@@ -149,12 +144,13 @@ if dein#check_install()
 endif
 
 "カラースキームはcall dein#end()の後で設定する必要がある
-let g:hybrid_custom_term_colors = 1
-colorscheme hybrid
-"80文字目のラインの色を変更
-highlight ColorColumn ctermbg=24
-"行番号の色を変更
-highlight LineNr ctermfg=250
+set term=screen-256color
+let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
+set termguicolors
+set background=dark
+colorscheme iceberg
+
 "===================================================================
 "NERD Tree
 "===================================================================
@@ -162,11 +158,12 @@ nnoremap <silent><leader>n :NERDTreeToggle<CR>
 let NERDTreeMapActivateNode='<space>'
 let NERDTreeShowHidden = 1
 
+
 "===================================================================
 "Lightline.vim
 "===================================================================
 let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
+      \ 'colorscheme': 'iceberg',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
@@ -185,96 +182,14 @@ let g:lightline = {
       \ 'subseparator': { 'left': "\uE0B1", 'right': "\uE0B3" }
       \ }
 
+
 "===================================================================
 "Neosnippet.vim
 "===================================================================
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-"===================================================================
-"Neocmplete.vim
-"===================================================================
-"Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions',
-    \ 'ruby' : $HOME.'/.vim/dict/ruby.dict',
-    \ 'php' : $HOME.'/.vim/dict/php.dict'
-        \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  " For no inserting <CR> key.
-  return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-
-" g:quickrun_config の初期化
-if !exists("g:quickrun_config")
-    let g:quickrun_config={}
-endif
-
-"===================================================================
-"Watchdogs
-"===================================================================
-nnoremap <silent> <buffer> <Leader>w :<C-u>WatchdogsRun<CR>
-
-let g:quickrun_config["ruby/watchdogs_checker"] = {
-  \ "type" : "watchdogs_checker/rubocop"
-  \}
-
-let g:quickrun_config["php/watchdogs_checker"] = {
-  \ "type" : "watchdogs_checker/phpcs",
-  \ "cmdopt" : "--standard=psr2"
-  \}
-
-call watchdogs#setup(g:quickrun_config)
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
 
 
 "===================================================================
@@ -286,17 +201,35 @@ augroup PrevimSettings
   autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 augroup END
 
+
 "===================================================================
 "Dash.vim
 "===================================================================
 nmap <silent> <leader>d <Plug>DashSearch
+
 
 "===================================================================
 " VimDevIcons
 "===================================================================
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 
+
 "===================================================================
 " Vim Markdown
 "===================================================================
 let g:vim_markdown_folding_disabled = 1
+
+
+"===================================================================
+" LanguageClient-neovim
+"===================================================================
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['javascript-typescript-stdio'],
+    \ 'go': ['go-langserver', '-gocodecompletion', '-func-snippet-enabled=false'],
+    \ 'c': ['clangd'],
+    \ }
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
