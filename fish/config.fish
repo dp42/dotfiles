@@ -13,6 +13,7 @@ set -gx PATH $HOME/.composer/vendor/bin $PATH
 set -gx PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
 set -gx PATH /usr/local/opt/python/libexec/bin $PATH
 set -gx PATH /usr/local/opt/llvm/bin $PATH
+set -gx PATH $HOME/.cargo/bin  $PATH
 set -gx MANPATH /usr/local/opt/coreutils/libexec/gnuman: $MANPATH
 
 # bobthefish

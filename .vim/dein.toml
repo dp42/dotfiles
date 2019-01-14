@@ -96,6 +96,8 @@ let g:ale_linters = {
 \   'php': ['phpcs'],
 \   'javascript': ['standard'],
 \   'go': ['gometalinter', 'gofmt'],
+\   'css': ['stylelint'],
+\   'scss': ['stylelint']
 \}
 let g:ale_fixers = {
 \   'javascript': ['standard'],
