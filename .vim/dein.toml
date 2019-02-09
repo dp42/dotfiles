@@ -12,16 +12,19 @@ build = 'make'
 repo = 'thinca/vim-quickrun'
 
 [[plugins]]
-repo = 'roxma/nvim-yarp'
+repo = 'prabirshrestha/async.vim'
 
 [[plugins]]
-repo = 'roxma/vim-hug-neovim-rpc'
+repo = 'prabirshrestha/vim-lsp'
 
 [[plugins]]
-repo = 'Shougo/deoplete.nvim'
-hook_add = '''
-let g:deoplete#enable_at_startup = 1
-'''
+repo = 'prabirshrestha/asyncomplete.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-neosnippet.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
 
 [[plugins]]
 repo = 'Shougo/neosnippet.vim'
@@ -34,6 +37,9 @@ repo = 'tpope/vim-fugitive'
 
 [[plugins]]
 repo = 'editorconfig/editorconfig-vim'
+
+[[plugins]]
+repo = 'tpope/vim-commentary'
 
 [[plugins]]
 repo = 'cohama/lexima.vim'
@@ -54,6 +60,9 @@ repo = 'ryanoasis/vim-devicons'
 repo = 'itchyny/lightline.vim'
 
 [[plugins]]
+repo = 'maximbaz/lightline-ale'
+
+[[plugins]]
 repo = 'w0ng/vim-hybrid'
 
 [[plugins]]
@@ -66,12 +75,7 @@ repo = 'kannokanno/previm'
 repo = 'rizzatti/dash.vim'
 
 [[plugins]]
-repo = 'ctrlpvim/ctrlp.vim'
-hook_add = '''
-let g:ctrlp_show_hidden = 1
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.jpg
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store'
-'''
+repo = 'junegunn/fzf.vim'
 
 [[plugins]]
 repo = 'godlygeek/tabular'
@@ -83,14 +87,12 @@ repo = 'plasticboy/vim-markdown'
 repo = 'soramugi/auto-ctags.vim'
 
 [[plugins]]
-repo = 'autozimu/LanguageClient-neovim'
-rev = 'next'
-build = 'bash install.sh'
-
-[[plugins]]
 repo = 'w0rp/ale'
 hook_add = '''
+let g:ale_lint_on_enter = 0
 let g:ale_sign_column_always = 1
+let g:ale_sign_error = "X"
+let g:ale_sign_warning = "!"
 let g:ale_linters = {
 \   'ruby': ['rubocop'],
 \   'php': ['phpcs'],
@@ -100,7 +102,8 @@ let g:ale_linters = {
 \   'scss': ['stylelint']
 \}
 let g:ale_fixers = {
-\   'javascript': ['standard'],
+\   'ruby': ['rubocop'],
+\   'javascript': ['prettier_standard'],
 \   'go': ['gofmt']
 \}
 let g:ale_php_phpcs_standard = 'PSR2'

@@ -15,6 +15,7 @@ set -gx PATH /usr/local/opt/python/libexec/bin $PATH
 set -gx PATH /usr/local/opt/llvm/bin $PATH
 set -gx PATH $HOME/.cargo/bin  $PATH
 set -gx MANPATH /usr/local/opt/coreutils/libexec/gnuman: $MANPATH
+set -x FZF_DEFAULT_COMMAND 'pt -g= --hidden --ignore=.git'
 
 # bobthefish
 set -g theme_display_git_master_branch yes

@@ -22,7 +22,7 @@ set nobackup "バックアップファイルを作成しない
 set notitle
 set noundofile "アンドゥファイルを作成しない"
 set completeopt=menuone "補完の結果をプレビューさせない
-map ¥ <leader>
+let mapleader="\<Space>"
 set clipboard=unnamed
 set textwidth=0
 autocmd FileType text setlocal textwidth=0
@@ -38,7 +38,6 @@ set encoding=utf-8
 scriptencoding utf-8
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,euc-jp,cp932,sjis,latin1 "日本語自動識別用設定
 
-
 "===================================================================
 " Indentation
 "===================================================================
@@ -47,7 +46,6 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 set softtabstop=2
-
 
 "===================================================================
 " Search
@@ -95,12 +93,19 @@ nnoremap <C-]> g<C-]>
 nnoremap x "_x
 " jjでエスケープ
 inoremap <silent> jj <ESC>
+"fzfでファイル検索
+nmap <leader>f :Files<CR>
+"fzfでバッファ検索
+nmap <leader>b :Buffers<CR>
+"fzfでタグ検索
+nmap <leader>t :Tags<CR>
+
 
 "===================================================================
 " PHP Development
 "===================================================================
 " 文字列中のSQLをハイライト
-"let php_sql_query           = 1
+let php_sql_query           = 1
 " Baselibメソッドのハイライト
 let php_baselib             = 1
 " 文字列中のHTMLをハイライト
@@ -109,7 +114,6 @@ let php_htmlInStrings       = 1
 let php_noShortTags         = 1
 " カッコが閉じていない場合にハイライト
 let php_parent_error_close  = 1
-
 " SQLのシンタックスハイライトをMySQLにする
 let g:sql_type_default = 'mysql'
 
@@ -151,6 +155,7 @@ set termguicolors
 set background=dark
 colorscheme iceberg
 
+
 "===================================================================
 "NERD Tree
 "===================================================================
@@ -165,6 +170,9 @@ let NERDTreeShowHidden = 1
 let g:lightline = {
       \ 'colorscheme': 'iceberg',
       \ 'active': {
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'fileformat', 'fileencoding', 'filetype' ],
+      \              [ 'linter_checking', 'linter_errors', 'linter_warnings' ] ],
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
       \ },
@@ -178,6 +186,17 @@ let g:lightline = {
       \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
       \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
       \ },
+      \ 'component_expand': {
+      \   'linter_checking': 'lightline#ale#checking',
+      \   'linter_warnings': 'lightline#ale#warnings',
+      \   'linter_errors': 'lightline#ale#errors',
+      \   'linter_ok': 'lightline#ale#ok',
+      \ },
+      \ 'component_type': {
+      \   'linter_warnings': 'warning',
+      \   'linter_errors': 'error',
+      \   'linter_checking': 'left',
+      \ },
       \ 'separator': { 'left': "\uE0B0", 'right': "\uE0B2" },
       \ 'subseparator': { 'left': "\uE0B1", 'right': "\uE0B3" }
       \ }
@@ -190,6 +209,13 @@ let g:lightline = {
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
+let g:neosnippet#disable_runtime_snippets = {'_' : 1}
+let g:neosnippet#snippets_directory = ['~/.vim/bundles/.cache/vimrc/.dein/neosnippets','~/.vim/snippets/']
+call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
+    \ 'name': 'neosnippet',
+    \ 'whitelist': ['*'],
+    \ 'completor': function('asyncomplete#sources#neosnippet#completor'),
+    \ }))
 
 
 "===================================================================
@@ -221,14 +247,41 @@ let g:vim_markdown_folding_disabled = 1
 
 
 "===================================================================
-" LanguageClient-neovim
+" LSP settings
 "===================================================================
-let g:LanguageClient_serverCommands = {
-    \ 'javascript': ['javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['javascript-typescript-stdio'],
-    \ 'go': ['go-langserver', '-gocodecompletion', '-func-snippet-enabled=false']
-    \ }
+let g:lsp_diagnostics_enabled = 0
+if executable('solargraph')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'solargraph',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+        \ 'initialization_options': {"diagnostics": "true"},
+        \ 'whitelist': ['ruby'],
+        \ })
+endif
 
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+if executable('gopls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'gopls',
+        \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+        \ 'whitelist': ['go'],
+        \ })
+endif
+
+au User lsp_setup call lsp#register_server({
+     \ 'name': 'php-language-server',
+     \ 'cmd': {server_info->['php', expand('~/.vim/bundles/repos/github.com/felixfbecker/php-language-server/bin/php-language-server.php')]},
+     \ 'whitelist': ['php'],
+     \ })
+
+
+"===================================================================
+" fzf
+"===================================================================
+set rtp+=/usr/local/opt/fzf
+
+
+"===================================================================
+" auto-ctags
+"===================================================================
+let g:auto_ctags = 1
+let g:auto_ctags_tags_args = '--tag-relative=yes --recurse --sort=yes'

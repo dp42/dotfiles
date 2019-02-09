@@ -15,14 +15,6 @@ repo = 'mxw/vim-jsx'
 on_ft = ['javascript', 'javascript.jsx']
 
 [[plugins]]
-repo = 'phpactor/phpactor'
+repo = 'felixfbecker/php-language-server'
 on_ft = ['php']
-build = 'composer install'
-
-[[plugins]]
-repo = 'kristijanhusak/deoplete-phpactor'
-on_ft = ['php']
-
-[[plugins]]
-repo = 'uplus/deoplete-solargraph'
-on_ft = ['ruby']
+build = 'composer install && composer run-script parse-stubs'
