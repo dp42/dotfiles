@@ -63,9 +63,6 @@ repo = 'itchyny/lightline.vim'
 repo = 'maximbaz/lightline-ale'
 
 [[plugins]]
-repo = 'w0ng/vim-hybrid'
-
-[[plugins]]
 repo = 'cocopon/iceberg.vim'
 
 [[plugins]]
