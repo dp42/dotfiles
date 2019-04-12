@@ -17,6 +17,7 @@ set -gx PATH $HOME/.cargo/bin  $PATH
 set -gx MANPATH /usr/local/opt/coreutils/libexec/gnuman: $MANPATH
 set -gx FZF_DEFAULT_COMMAND 'pt -g= --hidden --ignore=.git'
 set -gx BAT_CONFIG_PATH $HOME/.config/bat/bat.conf
+set -g theme_display_date no
 
 # bobthefish
 set -g theme_display_git_master_branch yes
