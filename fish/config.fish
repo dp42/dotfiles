@@ -5,9 +5,9 @@ set -x LC_ALL ja_JP.UTF-8
 
 # Set paths
 rbenv init - | source
-set -gx GOPATH $HOME/Dev
+source $HOME/.phpbrew/phpbrew.fish
+set -gx GOPATH $HOME
 set -gx PATH $HOME/bin $PATH
-set -gx PATH $GOPATH/bin $PATH
 set -gx PATH $HOME/.nodebrew/current/bin $PATH
 set -gx PATH $HOME/.composer/vendor/bin $PATH
 set -gx PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
