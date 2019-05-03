@@ -31,3 +31,5 @@ function fish_user_key_bindings
     bind \cs peco_change_repository
     bind \cr peco_history
 end
+
+start_tmux
