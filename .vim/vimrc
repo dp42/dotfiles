@@ -99,7 +99,7 @@ nmap <leader>f :Files<CR>
 nmap <leader>b :Buffers<CR>
 "fzfでタグ検索
 nmap <leader>t :Tags<CR>
-
+inoremap <C-f> <C-x><C-o>
 
 "===================================================================
 " PHP Development
@@ -213,12 +213,11 @@ smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
 let g:neosnippet#disable_runtime_snippets = {'_' : 1}
 let g:neosnippet#snippets_directory = ['~/.vim/bundles/.cache/vimrc/.dein/neosnippets','~/.vim/snippets/']
-call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
-    \ 'name': 'neosnippet',
-    \ 'whitelist': ['*'],
-    \ 'completor': function('asyncomplete#sources#neosnippet#completor'),
-    \ }))
-
+" call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
+"     \ 'name': 'neosnippet',
+"     \ 'whitelist': ['*'],
+"     \ 'completor': function('asyncomplete#sources#neosnippet#completor'),
+"     \ }))
 
 "===================================================================
 " Previm
@@ -251,6 +250,7 @@ let g:vim_markdown_folding_disabled = 1
 "===================================================================
 " LSP settings
 "===================================================================
+let g:lsp_async_completion = 1
 nmap <leader>h <Plug>(lsp-hover)
 
 let g:lsp_diagnostics_enabled = 0
@@ -261,6 +261,7 @@ if executable('solargraph')
         \ 'initialization_options': {"diagnostics": "true"},
         \ 'whitelist': ['ruby'],
         \ })
+    autocmd FileType ruby setlocal omnifunc=lsp#complete
 endif
 
 if executable('gopls')
@@ -276,6 +277,7 @@ au User lsp_setup call lsp#register_server({
      \ 'cmd': {server_info->['php', expand('~/.vim/bundles/repos/github.com/felixfbecker/php-language-server/bin/php-language-server.php')]},
      \ 'whitelist': ['php'],
      \ })
+    autocmd FileType php setlocal omnifunc=lsp#complete
 
 if executable('typescript-language-server')
   au User lsp_setup call lsp#register_server({

@@ -19,18 +19,32 @@ repo = 'prabirshrestha/vim-lsp'
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete.vim'
+on_event = 'InsertEnter'
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-neosnippet.vim'
+depends = ['asyncomplete.vim', 'neosnippet.vim', 'neosnippet-snippets']
+on_event = 'InsertEnter'
+hook_add = '''
+call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
+    \ 'name': 'neosnippet',
+    \ 'whitelist': ['*'],
+    \ 'completor': function('asyncomplete#sources#neosnippet#completor'),
+    \ }))
+'''
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'
+depends = ['asyncomplete.vim', 'vim-lsp']
+on_event = 'InsertEnter'
 
 [[plugins]]
 repo = 'Shougo/neosnippet.vim'
+on_event = 'InsertEnter'
 
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
+on_event = 'InsertEnter'
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
@@ -85,3 +99,7 @@ repo = 'soramugi/auto-ctags.vim'
 
 [[plugins]]
 repo = 'w0rp/ale'
+
+[[plugins]]
+repo = 'yami-beta/asyncomplete-omni.vim'
+
