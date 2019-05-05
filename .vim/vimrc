@@ -213,11 +213,6 @@ smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
 let g:neosnippet#disable_runtime_snippets = {'_' : 1}
 let g:neosnippet#snippets_directory = ['~/.vim/bundles/.cache/vimrc/.dein/neosnippets','~/.vim/snippets/']
-" call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
-"     \ 'name': 'neosnippet',
-"     \ 'whitelist': ['*'],
-"     \ 'completor': function('asyncomplete#sources#neosnippet#completor'),
-"     \ }))
 
 "===================================================================
 " Previm
@@ -321,5 +316,4 @@ set rtp+=/usr/local/opt/fzf
 "===================================================================
 " auto-ctags
 "===================================================================
-let g:auto_ctags = 1
 let g:auto_ctags_tags_args = '--tag-relative=yes --recurse --sort=yes'
