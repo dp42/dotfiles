@@ -265,6 +265,7 @@ if executable('gopls')
         \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
         \ 'whitelist': ['go'],
         \ })
+    autocmd FileType go setlocal omnifunc=lsp#complete
 endif
 
 au User lsp_setup call lsp#register_server({
@@ -280,6 +281,7 @@ if executable('typescript-language-server')
         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
         \ 'whitelist': ['javascript', 'javascript.jsx', 'typescript', 'typescript.tsx'],
         \ })
+    autocmd FileType javascript,javascript.jsx,typescript,typescript.jsx setlocal omnifunc=lsp#complete
 endif
 
 
