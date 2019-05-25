@@ -1,8 +1,8 @@
 "===================================================================
-" Basic settings
+" Basic Settings
 "===================================================================
+source ~/.vim/plugins.vim
 set nocompatible "vi互換モードを無効化
-filetype off "ファイルタイプ自動検出を一旦無効化
 syntax on "シンタックスハイライト有効
 set nofixeol
 set ambiwidth=single
@@ -22,30 +22,40 @@ set nobackup "バックアップファイルを作成しない
 set notitle
 set noundofile "アンドゥファイルを作成しない"
 set completeopt=menuone "補完の結果をプレビューさせない
-let mapleader="\<Space>"
 set clipboard=unnamed
 set textwidth=0
-autocmd FileType text setlocal textwidth=0
+au BufNewFile,BufRead *.vue set filetype=vue
 packadd! matchit
-set grepprg=grep\ -srnIH\ --exclude-dir=.git\ --exclude=tags
-au QuickfixCmdPost make,grep,grepadd,vimgrep copen
-
-
-"===================================================================
-" Charset
-"===================================================================
 set encoding=utf-8
 scriptencoding utf-8
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,euc-jp,cp932,sjis,latin1 "日本語自動識別用設定
-
-"===================================================================
-" Indentation
-"===================================================================
 set autoindent
 set tabstop=2
 set shiftwidth=2
 set expandtab
 set softtabstop=2
+let g:auto_ctags_tags_args = '--tag-relative=yes --recurse --sort=yes'
+
+
+"===================================================================
+" Keymap
+"===================================================================
+let mapleader="\<Space>"
+" ESCでターミナル終了
+tnoremap <ESC> <C-w>:q!<CR>
+" カーソルが単語の途中でも頭から置換する
+nnoremap cw bcw
+"ESCで検索ハイライトを消す
+nnoremap  <silent> <Esc> :nohlsearch<CR><Esc>
+"タグジャンプの候補が複数ある場合はリストを出す
+nnoremap <C-]> g<C-]>
+"xで削除した文字をヤンクしない
+nnoremap x "_x
+vnoremap x "_x
+" jjでエスケープ
+inoremap <silent> jj <ESC>:nohlsearch<CR>
+nmap <silent> <leader>d <Plug>DashSearch
+
 
 "===================================================================
 " Search
@@ -69,85 +79,14 @@ set list "不可視文字を表示する
 set colorcolumn=80 "80文字目に目印
 set listchars=tab:>-,trail:-,eol:↲ "不可視文字の設定内容
 set cmdheight=2 "コマンド行の高さを2行に設定
-
-"===================================================================
-" Syntax highlighting
-"===================================================================
 "JSONのダブルクオーテーションマークを表示する
 autocmd Filetype json setl conceallevel=0
 ".jsファイルでもJSXをハイライト
 let g:jsx_ext_required = 0
-
 "markdownファイルでconceal無効化
 let g:vim_markdown_conceal = 0
 autocmd Filetype markdown setl conceallevel=0
 
-"===================================================================
-" Key bindings
-"===================================================================
-"ESCで検索ハイライトを消す
-nmap <Esc><Esc> :nohlsearch<CR><Esc>
-"タグジャンプの候補が複数ある場合はリストを出す
-nnoremap <C-]> g<C-]>
-"xで削除した文字をヤンクしない
-nnoremap x "_x
-" jjでエスケープ
-inoremap <silent> jj <ESC>
-"fzfでファイル検索
-nmap <leader>f :Files<CR>
-"fzfでバッファ検索
-nmap <leader>b :Buffers<CR>
-"fzfでタグ検索
-nmap <leader>t :Tags<CR>
-inoremap <C-f> <C-x><C-o>
-
-"===================================================================
-" PHP Development
-"===================================================================
-" 文字列中のSQLをハイライト
-let php_sql_query           = 1
-" Baselibメソッドのハイライト
-let php_baselib             = 1
-" 文字列中のHTMLをハイライト
-let php_htmlInStrings       = 1
-" <? をハイライト除外にする
-let php_noShortTags         = 1
-" カッコが閉じていない場合にハイライト
-let php_parent_error_close  = 1
-" SQLのシンタックスハイライトをMySQLにする
-let g:sql_type_default = 'mysql'
-
-
-"===================================================================
-"dein.vim
-"===================================================================
-" required:
-set runtimepath+=~/.vim/bundles/repos/github.com/shougo/dein.vim
-
-" required:
-if dein#load_state('~/.vim/bundles')
-  call dein#begin('~/.vim/bundles')
-
-  let  s:toml = '~/.vim/dein.toml'
-  let  s:lazy_toml = '~/.vim/dein_lazy.toml'
-
-  call dein#load_toml(s:toml, {'lazy': 0})
-  call dein#load_toml(s:lazy_toml, {'lazy': 1})
-
-  " Required:
-  call dein#end()
-  call dein#save_state()
-endif
-
-" Required:
-filetype plugin indent on
-syntax enable
-
-if dein#check_install()
-  call dein#install()
-endif
-
-"カラースキームはcall dein#end()の後で設定する必要がある
 if &term == 'screen-256color'
   let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
   let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
@@ -159,11 +98,86 @@ colorscheme iceberg
 
 
 "===================================================================
+" CoC
+"===================================================================
+" Hover
+nmap <silent> <leader>h :<C-U>call CocAction('doHover')<CR>
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+" Remap keys for gotos
+nmap <silent> <leader>ld <Plug>(coc-definition)
+nmap <silent> <leader>lt <Plug>(coc-type-definition)
+nmap <silent> <leader>li <Plug>(coc-implementation)
+nmap <silent> <leader>lr <Plug>(coc-references)
+
+
+"===================================================================
+" ALE
+"===================================================================
+let g:ale_set_highlights = 0
+let g:ale_lint_on_enter = 0
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = "X"
+let g:ale_sign_warning = "!"
+let g:ale_linters = {
+\   'ruby': ['rubocop'],
+\   'php': ['php', 'phpcs'],
+\   'javascript': ['eslint', 'standard'],
+\   'typescript': ['eslint'],
+\   'go': ['gometalinter', 'gofmt'],
+\   'css': ['stylelint'],
+\   'scss': ['stylelint']
+\}
+let g:ale_fixers = {
+\   'ruby': ['rubocop'],
+\   'javascript': ['prettier_standard'],
+\   'typescript': ['prettier'],
+\   'go': ['gofmt']
+\}
+let g:ale_php_phpcs_standard = 'PSR2'
+let g:ale_go_gometalinter_options = '--fast'
+
+
+"===================================================================
 "NERD Tree
 "===================================================================
 nnoremap <silent><leader>n :NERDTreeToggle<CR>
 let NERDTreeMapActivateNode='<space>'
 let NERDTreeShowHidden = 1
+let NERDTreeQuitOnOpen = 3
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+
+
+"===================================================================
+" fzf
+"===================================================================
+set rtp+=/usr/local/opt/fzf
+"ファイル検索
+nmap <leader>ff :Files<CR>
+"バッファ検索
+nmap <leader>fb :Buffers<CR>
+"タグ検索
+nmap <leader>ft :Tags<CR>
+"ファイル履歴検索
+nmap <leader>fh :History<CR>
+"コマンド履歴検索
+nmap <leader>fc :History:<CR>
+"Rg
+nmap <leader>fr :Rg<CR>
+" <C-]>でタグ検索
+nnoremap <silent> <C-]> :call fzf#vim#tags(expand('<cword>'))<CR>
+
+" Rg with preview
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --line-number --no-heading --color=auto --smart-case '.shellescape(<q-args>),
+  \   0,
+  \   fzf#vim#with_preview({'options': '-e --delimiter : --nth 3..'}, 'right:60%'),
+  \   <bang>0)
+
+" Files command with preview
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview('right:60%'), <bang>0)
 
 
 "===================================================================
@@ -205,117 +219,28 @@ let g:lightline = {
 
 
 "===================================================================
-"Neosnippet.vim
+" PHP
 "===================================================================
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
-let g:neosnippet#disable_runtime_snippets = {'_' : 1}
-let g:neosnippet#snippets_directory = ['~/.vim/bundles/.cache/vimrc/.dein/neosnippets','~/.vim/snippets/']
+" 文字列中のSQLをハイライト
+let php_sql_query           = 1
+" Baselibメソッドのハイライト
+let php_baselib             = 1
+" 文字列中のHTMLをハイライト
+let php_htmlInStrings       = 1
+" <? をハイライト除外にする
+let php_noShortTags         = 1
+" カッコが閉じていない場合にハイライト
+let php_parent_error_close  = 1
+" SQLのシンタックスハイライトをMySQLにする
+let g:sql_type_default = 'mysql'
+
 
 "===================================================================
-" Previm
+" Markdown
 "===================================================================
+let g:vim_markdown_folding_disabled = 1
 let g:previm_open_cmd = "open -a \"Google Chrome\""
 augroup PrevimSettings
   autocmd!
   autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 augroup END
-
-
-"===================================================================
-"Dash.vim
-"===================================================================
-nmap <silent> <leader>d <Plug>DashSearch
-
-
-"===================================================================
-" VimDevIcons
-"===================================================================
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-
-
-"===================================================================
-" Vim Markdown
-"===================================================================
-let g:vim_markdown_folding_disabled = 1
-
-
-"===================================================================
-" LSP settings
-"===================================================================
-let g:lsp_async_completion = 1
-nmap <leader>h <Plug>(lsp-hover)
-
-let g:lsp_diagnostics_enabled = 0
-if executable('solargraph')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'solargraph',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
-        \ 'initialization_options': {"diagnostics": "true"},
-        \ 'whitelist': ['ruby'],
-        \ })
-    autocmd FileType ruby setlocal omnifunc=lsp#complete
-endif
-
-if executable('gopls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'gopls',
-        \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
-        \ 'whitelist': ['go'],
-        \ })
-    autocmd FileType go setlocal omnifunc=lsp#complete
-endif
-
-au User lsp_setup call lsp#register_server({
-     \ 'name': 'php-language-server',
-     \ 'cmd': {server_info->['php', expand('~/.vim/bundles/repos/github.com/felixfbecker/php-language-server/bin/php-language-server.php')]},
-     \ 'whitelist': ['php'],
-     \ })
-    autocmd FileType php setlocal omnifunc=lsp#complete
-
-if executable('typescript-language-server')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'typescript-language-server',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-        \ 'whitelist': ['javascript', 'javascript.jsx', 'typescript', 'typescript.tsx'],
-        \ })
-    autocmd FileType javascript,javascript.jsx,typescript,typescript.jsx setlocal omnifunc=lsp#complete
-endif
-
-
-"===================================================================
-" ALE settings
-"===================================================================
-let g:ale_set_highlights = 0
-let g:ale_lint_on_enter = 0
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = "X"
-let g:ale_sign_warning = "!"
-let g:ale_linters = {
-\   'ruby': ['rubocop'],
-\   'php': ['php', 'phpcs'],
-\   'javascript': ['standard'],
-\   'go': ['gometalinter', 'gofmt'],
-\   'css': ['stylelint'],
-\   'scss': ['stylelint']
-\}
-let g:ale_fixers = {
-\   'ruby': ['rubocop'],
-\   'javascript': ['prettier_standard'],
-\   'go': ['gofmt']
-\}
-let g:ale_php_phpcs_standard = 'PSR2'
-let g:ale_go_gometalinter_options = '--fast'
-
-"===================================================================
-" fzf
-"===================================================================
-set rtp+=/usr/local/opt/fzf
-
-
-"===================================================================
-" auto-ctags
-"===================================================================
-let g:auto_ctags_tags_args = '--tag-relative=yes --recurse --sort=yes'

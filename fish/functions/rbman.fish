@@ -1,3 +1,3 @@
 function rbman
-  cat ~/rbmanindex.txt | fzf --preview="refe {} | bat -l ruby --color=always"
+  ri . | tail -n +3 | fzf --preview="ri {} | bat"
 end

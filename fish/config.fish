@@ -3,7 +3,7 @@ set -gx EDITOR vim
 set -x LANG ja_JP.UTF-8
 set -x LC_ALL ja_JP.UTF-8
 
-# Set paths
+# PATH
 rbenv init - | source
 source $HOME/.phpbrew/phpbrew.fish
 set -gx GOPATH $HOME
@@ -19,17 +19,21 @@ set -gx FZF_DEFAULT_COMMAND 'pt -g= --hidden --ignore=.git'
 set -gx BAT_CONFIG_PATH $HOME/.config/bat/bat.conf
 set -g theme_display_date no
 
+#Alias
+alias gpl='git pull origin (git rev-parse --abbrev-ref HEAD)'
+alias gps='git push origin (git rev-parse --abbrev-ref HEAD)'
+
 # bobthefish
 set -g theme_display_git_master_branch yes
 
+# powerline
 set fish_function_path $fish_function_path "/usr/local/lib/python3.7/site-packages/powerline/bindings/fish"
 powerline-setup
 
-alias diary='vim ~/Diary/(date +%Y/diary-%Y-%m-%d.md)'
 
 function fish_user_key_bindings
-    bind \cs peco_change_repository
-    bind \cr peco_history
+    bind \cs fzf_change_repository
+    bind \cr fzf_history
 end
 
 start_tmux

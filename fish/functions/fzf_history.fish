@@ -1,5 +1,5 @@
-function peco_history
-  history|peco $peco_flags|read selected_command
+function fzf_history
+  history|fzf --height 40% --reverse|read selected_command
 
   if [ $selected_command ]
     commandline $selected_command

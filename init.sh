@@ -9,3 +9,4 @@ ln -nfs ~/src/github.com/dp42/dotfiles/.editorconfig $HOME/.editorconfig
 ln -nfs ~/src/github.com/dp42/dotfiles/.dircolors $HOME/.dircolors
 ln -nfs ~/src/github.com/dp42/dotfiles/.ctags.d $HOME/.ctags.d
 ln -nfs ~/src/github.com/dp42/dotfiles/git $HOME/.config/git
+ln -nfs ~/src/github.com/dp42/dotfiles/coc $HOME/.config/coc
