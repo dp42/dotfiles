@@ -25,6 +25,7 @@ set completeopt=menuone "補完の結果をプレビューさせない
 set clipboard=unnamed
 set textwidth=0
 au BufNewFile,BufRead *.vue set filetype=vue
+au BufNewFile,BufRead *.ts set filetype=typescript
 packadd! matchit
 set encoding=utf-8
 scriptencoding utf-8
@@ -43,8 +44,6 @@ let g:auto_ctags_tags_args = '--tag-relative=yes --recurse --sort=yes'
 let mapleader="\<Space>"
 " ESCでターミナル終了
 tnoremap <ESC> <C-w>:q!<CR>
-" カーソルが単語の途中でも頭から置換する
-nnoremap cw bcw
 "ESCで検索ハイライトを消す
 nnoremap  <silent> <Esc> :nohlsearch<CR><Esc>
 "タグジャンプの候補が複数ある場合はリストを出す
@@ -124,6 +123,7 @@ let g:ale_linters = {
 \   'php': ['php', 'phpcs'],
 \   'javascript': ['eslint', 'standard'],
 \   'typescript': ['eslint'],
+\   'vue': ['eslint'],
 \   'go': ['gometalinter', 'gofmt'],
 \   'css': ['stylelint'],
 \   'scss': ['stylelint']
@@ -132,6 +132,7 @@ let g:ale_fixers = {
 \   'ruby': ['rubocop'],
 \   'javascript': ['prettier_standard'],
 \   'typescript': ['prettier'],
+\   'vue': ['prettier'],
 \   'go': ['gofmt']
 \}
 let g:ale_php_phpcs_standard = 'PSR2'
