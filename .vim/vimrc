@@ -165,8 +165,6 @@ nmap <leader>fh :History<CR>
 nmap <leader>fc :History:<CR>
 "Rg
 nmap <leader>fr :Rg<CR>
-" <C-]>でタグ検索
-nnoremap <silent> <C-]> :call fzf#vim#tags(expand('<cword>'))<CR>
 
 " Rg with preview
 command! -bang -nargs=* Rg

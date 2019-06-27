@@ -14,7 +14,8 @@ set -gx PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
 set -gx PATH /usr/local/opt/python/libexec/bin $PATH
 set -gx PATH /usr/local/opt/llvm/bin $PATH
 set -gx PATH $HOME/.cargo/bin  $PATH
-set -gx MANPATH /usr/local/opt/coreutils/libexec/gnuman: $MANPATH
+set -gx PATH /usr/local/opt/mysql@5.7/bin $PATH
+set -gx MANPATH /usr/local/opt/coreutils/libexec/gnuman $MANPATH
 set -gx FZF_DEFAULT_COMMAND 'pt -g= --hidden --ignore=.git'
 set -gx BAT_CONFIG_PATH $HOME/.config/bat/bat.conf
 set -g theme_display_date no
@@ -37,4 +38,3 @@ function fish_user_key_bindings
 end
 
 start_tmux
-set -g fish_user_paths "/usr/local/opt/mysql@5.7/bin" $fish_user_paths
