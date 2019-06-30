@@ -19,6 +19,8 @@ set -gx MANPATH /usr/local/opt/coreutils/libexec/gnuman $MANPATH
 set -gx FZF_DEFAULT_COMMAND 'pt -g= --hidden --ignore=.git'
 set -gx BAT_CONFIG_PATH $HOME/.config/bat/bat.conf
 set -g theme_display_date no
+set -g theme_nerd_fonts yes
+set -g theme_display_cmd_duration no
 
 #Alias
 alias gpl='git pull origin (git rev-parse --abbrev-ref HEAD)'
@@ -37,4 +39,5 @@ function fish_user_key_bindings
     bind \cr fzf_history
 end
 
+eval (direnv hook fish)
 start_tmux
