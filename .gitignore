@@ -1,6 +1,5 @@
 .vim/plugged/
 .vim/.netrwhist
-node_modules/
 
 # fish shell
 fishd.*
