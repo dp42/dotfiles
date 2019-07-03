@@ -35,9 +35,11 @@ powerline-setup
 
 
 function fish_user_key_bindings
-    bind \cs fzf_change_repository
-    bind \cr fzf_history
+bind \cs fzf_change_repository
+bind \cr fzf_history
 end
 
 eval (direnv hook fish)
 start_tmux
+set -g fish_user_paths "/usr/local/opt/mysql@5.7/bin" $fish_user_paths
+direnv hook fish | source
