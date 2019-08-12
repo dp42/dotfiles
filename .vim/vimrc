@@ -43,7 +43,7 @@ let g:auto_ctags_tags_args = '--tag-relative=yes --recurse --sort=yes'
 "===================================================================
 let mapleader="\<Space>"
 " ESCでターミナル終了
-tnoremap <ESC> <C-w>:q!<CR>
+tnoremap <ESC> <C-W>:q!<CR>
 "ESCで検索ハイライトを消す
 nnoremap  <silent> <Esc> :nohlsearch<CR><Esc>
 "タグジャンプの候補が複数ある場合はリストを出す
@@ -54,7 +54,14 @@ vnoremap x "_x
 " jjでエスケープ
 inoremap <silent> jj <ESC>:nohlsearch<CR>
 nmap <silent> <leader>d <Plug>DashSearch
-
+" Split window
+nmap ss :split<Return>
+nmap sv :vsplit<Return>
+" Move window
+map mh <C-w>h
+map mk <C-w>k
+map mj <C-w>j
+map ml <C-w>l
 
 "===================================================================
 " Search
@@ -99,7 +106,6 @@ colorscheme iceberg
 "===================================================================
 " CoC
 "===================================================================
-" Hover
 nmap <silent> <leader>h :<C-U>call CocAction('doHover')<CR>
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
@@ -119,9 +125,9 @@ let g:ale_sign_column_always = 1
 let g:ale_sign_error = "X"
 let g:ale_sign_warning = "!"
 let g:ale_linters = {
-\   'ruby': ['rubocop'],
+\   'ruby': ['ruby', 'rubocop'],
 \   'php': ['php', 'phpcs'],
-\   'javascript': ['eslint', 'standard'],
+\   'javascript': ['eslint'],
 \   'typescript': ['eslint'],
 \   'vue': ['eslint'],
 \   'go': ['gometalinter', 'gofmt'],
@@ -130,9 +136,9 @@ let g:ale_linters = {
 \}
 let g:ale_fixers = {
 \   'ruby': ['rubocop'],
-\   'javascript': ['prettier_standard'],
-\   'typescript': ['prettier'],
-\   'vue': ['prettier'],
+\   'javascript': ['eslint'],
+\   'typescript': ['eslint'],
+\   'vue': ['eslint'],
 \   'go': ['gofmt']
 \}
 let g:ale_php_phpcs_standard = 'PSR2'
@@ -142,6 +148,7 @@ let g:ale_go_gometalinter_options = '--fast'
 "===================================================================
 "NERD Tree
 "===================================================================
+autocmd vimenter * NERDTree
 nnoremap <silent><leader>n :NERDTreeToggle<CR>
 let NERDTreeMapActivateNode='<space>'
 let NERDTreeShowHidden = 1

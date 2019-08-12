@@ -1,0 +1,9 @@
+#!/bin/bash
+if git rev-parse 2> /dev/null; then
+  tmux rename-window $(basename $(git rev-parse --show-toplevel))
+fi
+tmux split-window -vc "#{pane_current_path}" -p 20
+tmux split-window -hc "#{pane_current_path}" -p 50
+tmux select-pane -t 0
+vim
+
