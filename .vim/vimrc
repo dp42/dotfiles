@@ -5,7 +5,7 @@ source ~/.vim/plugins.vim
 set nocompatible "vi互換モードを無効化
 syntax on "シンタックスハイライト有効
 set nofixeol
-set ambiwidth=single
+set ambiwidth=double
 set splitbelow "垂直分割時、ウインドウを下に分割
 set splitright "水平分割時、ウインドウを右に分割
 set nostartofline "行の移動時、行頭に移動しない
