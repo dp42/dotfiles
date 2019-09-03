@@ -190,11 +190,12 @@ command! -bang -nargs=? -complete=dir Files
 let g:lightline = {
       \ 'colorscheme': 'iceberg',
       \ 'active': {
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'fileformat', 'fileencoding', 'filetype' ],
+      \   'right': [ [ 'filetype' ],
+      \              [ 'lineinfo', 'fileencoding' ],
       \              [ 'linter_checking', 'linter_errors', 'linter_warnings' ] ],
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+      \             [ 'readonly', 'filename', 'modified' ],
+      \             [ 'fugitive' ] ]
       \ },
       \ 'component': {
       \   'readonly': '%{&filetype=="help"?"":&readonly?"":""}',
@@ -217,8 +218,8 @@ let g:lightline = {
       \   'linter_errors': 'error',
       \   'linter_checking': 'left',
       \ },
-      \ 'separator': { 'left': "\uE0B0", 'right': "\uE0B2" },
-      \ 'subseparator': { 'left': "\uE0B1", 'right': "\uE0B3" }
+      \ 'separator': { 'left': "\uE0B8", 'right': "\uE0BA" },
+      \ 'subseparator': { 'left': "\uE0B9", 'right': "\uE0BB" }
       \ }
 
 
