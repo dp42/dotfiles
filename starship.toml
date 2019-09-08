@@ -1,0 +1,10 @@
+[character]
+symbol = "COMMAND:"
+[cmd_duration]
+disabled = true
+[directory]
+style = "bold blue"
+[package]
+disabled = true
+[nodejs]
+style = "cyan"
