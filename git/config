@@ -1,0 +1,9 @@
+[include]
+  path = ~/.gitconfig.local
+[ghq]
+	root = ~/src
+[alias]
+  co = checkout
+  cob = checkout -b
+  cam = commit --amend
+  delb = branch -D
