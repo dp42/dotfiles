@@ -1,0 +1,1 @@
+/Users/koichi/.vim/plugged/ultisnips/ftdetect/snippets.vim

@@ -249,3 +249,15 @@ augroup PrevimSettings
   autocmd!
   autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 augroup END
+
+"===================================================================
+" MySQL
+"===================================================================
+let g:sql_type_default = 'mysql'
+
+"===================================================================
+" UltiSnips
+"===================================================================
+let g:UltiSnipsSnippetsDir = 'Snips'
+let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'Snips']
+let g:UltiSnipsEnableSnipMate = 0

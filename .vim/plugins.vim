@@ -14,15 +14,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'itchyny/lightline.vim'
   Plug 'maximbaz/lightline-ale'
   Plug 'cocopon/iceberg.vim'
+  Plug 'SirVer/ultisnips'
+  Plug 'sheerun/vim-polyglot'
+  Plug 'honza/vim-snippets'
 
   " Lazy loading
-  Plug 'pangloss/vim-javascript', {'for': ['javascript', 'javascript.jsx']}
-  Plug 'othree/yajs.vim', {'for': ['javascript', 'javascript.jsx']}
   Plug 'othree/javascript-libraries-syntax.vim', {'for': ['javascript', 'javascript.jsx']}
-  Plug 'mxw/vim-jsx', {'for': ['javascript', 'javascript.jsx']}
-  Plug 'leafgarland/typescript-vim', {'for': ['typescript']}
   Plug 'posva/vim-vue', {'for': 'vue'}
   Plug 'tpope/vim-rails', {'for': 'ruby'}
-  Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
-  Plug 'kannokanno/previm', {'for': 'markdown'}
 call plug#end()
