@@ -26,7 +26,6 @@ set clipboard=unnamed
 set textwidth=0
 au BufNewFile,BufRead *.vue set filetype=vue
 au BufNewFile,BufRead *.ts set filetype=typescript
-packadd! matchit
 set encoding=utf-8
 scriptencoding utf-8
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,euc-jp,cp932,sjis,latin1 "日本語自動識別用設定
@@ -36,7 +35,7 @@ set shiftwidth=2
 set expandtab
 set softtabstop=2
 let g:auto_ctags_tags_args = '--tag-relative=yes --recurse --sort=yes'
-
+packadd matchit
 
 "===================================================================
 " Keymap
