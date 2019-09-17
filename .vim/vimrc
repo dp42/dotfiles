@@ -26,7 +26,6 @@ set clipboard=unnamed
 set textwidth=0
 au BufNewFile,BufRead *.vue set filetype=vue
 au BufNewFile,BufRead *.ts set filetype=typescript
-packadd! matchit
 set encoding=utf-8
 scriptencoding utf-8
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,euc-jp,cp932,sjis,latin1 "日本語自動識別用設定
@@ -36,7 +35,11 @@ set shiftwidth=2
 set expandtab
 set softtabstop=2
 let g:auto_ctags_tags_args = '--tag-relative=yes --recurse --sort=yes'
+let g:sql_type_default = 'mysql'
 
+if !has('nvim')
+  packadd matchit
+endif
 
 "===================================================================
 " Keymap
@@ -51,8 +54,6 @@ nnoremap <C-]> g<C-]>
 "xで削除した文字をヤンクしない
 nnoremap x "_x
 vnoremap x "_x
-" jjでエスケープ
-inoremap <silent> jj <ESC>:nohlsearch<CR>
 nmap <silent> <leader>d <Plug>DashSearch
 " Split window
 nmap ss :split<Return>
@@ -190,8 +191,8 @@ command! -bang -nargs=? -complete=dir Files
 let g:lightline = {
       \ 'colorscheme': 'iceberg',
       \ 'active': {
-      \   'right': [ [ 'filetype' ],
-      \              [ 'lineinfo', 'fileencoding' ],
+      \   'right': [ [ 'fileencoding' ],
+      \              [ 'lineinfo' ],
       \              [ 'linter_checking', 'linter_errors', 'linter_warnings' ] ],
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'readonly', 'filename', 'modified' ],
@@ -219,7 +220,7 @@ let g:lightline = {
       \   'linter_checking': 'left',
       \ },
       \ 'separator': { 'left': "\uE0B8", 'right': "\uE0BA" },
-      \ 'subseparator': { 'left': "\uE0B9", 'right': "\uE0BB" }
+      \ 'subseparator': { 'left': "\uE0B9", 'right': "|" }
       \ }
 
 
@@ -249,3 +250,11 @@ augroup PrevimSettings
   autocmd!
   autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 augroup END
+
+
+"===================================================================
+" UltiSnips
+"===================================================================
+let g:UltiSnipsSnippetsDir = 'Snips'
+let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'Snips']
+let g:UltiSnipsEnableSnipMate = 0
