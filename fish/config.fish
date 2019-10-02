@@ -17,7 +17,8 @@ set -gx PATH /usr/local/opt/llvm/bin $PATH
 set -gx PATH $HOME/.cargo/bin  $PATH
 set -gx PATH /usr/local/opt/mysql@5.7/bin $PATH
 set -gx MANPATH /usr/local/opt/coreutils/libexec/gnuman $MANPATH
-set -gx FZF_DEFAULT_COMMAND 'pt -g= --hidden --ignore=.git'
+set -gx FZF_DEFAULT_COMMAND 'rg --files -g !.git/ --hidden'
+set -gx FZF_DEFAULT_OPTS '--height 30% --reverse'
 set -gx BAT_CONFIG_PATH $HOME/.config/bat/bat.conf
 set -g theme_display_date no
 set -g theme_nerd_fonts yes
