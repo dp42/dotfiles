@@ -1,4 +1,5 @@
-/extensions/**
+/extensions/**/
 db.json
 history.json
 memos.json
+yarn.lock

@@ -1,7 +1,6 @@
 .vim/plugged/
 .vim/.netrwhist
 coc/extensions/db.json
-coc/extensions/package.json
 
 # fish shell
 fishd.*
