@@ -7,6 +7,6 @@
     "coc-vetur": ">=1.1.6",
     "coc-ultisnips": ">=1.2.3",
     "coc-tag": ">=1.2.4",
-    "coc-word": ">=1.2.2"
+    "coc-syntax": ">=1.2.4"
   }
 }

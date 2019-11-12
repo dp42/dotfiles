@@ -34,6 +34,8 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 set softtabstop=2
+set spell
+set spelllang=en,cjk
 let g:auto_ctags_tags_args = '--tag-relative=yes --recurse --sort=yes'
 let g:sql_type_default = 'mysql'
 
@@ -186,6 +188,13 @@ command! -bang -nargs=* Rg
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview('right:60%'), <bang>0)
 
+"===================================================================
+"fugitive.vim
+"===================================================================
+nnoremap <silent> <leader>gs :Gstatus<CR><C-w>T
+nnoremap <silent> <leader>ga :Gwrite<CR>
+nnoremap <silent> <leader>gc :Gcommit<CR>
+nnoremap <silent> <leader>gd :Gdiff<CR>
 
 "===================================================================
 "Lightline.vim

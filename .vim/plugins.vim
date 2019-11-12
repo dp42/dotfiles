@@ -18,6 +18,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'SirVer/ultisnips'
   Plug 'sheerun/vim-polyglot'
   Plug 'honza/vim-snippets'
+  Plug 'majutsushi/tagbar'
 
   " Lazy loading
   Plug 'othree/javascript-libraries-syntax.vim', {'for': ['javascript', 'javascript.jsx']}

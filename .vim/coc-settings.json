@@ -1,7 +1,7 @@
 {
   "suggest.maxCompleteItemCount": 20,
   "diagnostic.enable": false,
-  "coc.preferences.hoverTarget": "preview",
+  "coc.preferences.hoverTarget": "hover",
   "languageserver": {
     "golang": {
       "command": "gopls",
