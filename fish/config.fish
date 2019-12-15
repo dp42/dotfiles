@@ -11,6 +11,7 @@ set -gx GOPATH $HOME
 set -gx PATH $HOME/bin $PATH
 set -gx PATH $HOME/.nodebrew/current/bin $PATH
 set -gx PATH $HOME/.composer/vendor/bin $PATH
+set -gx PATH $HOME/.phpbrew/bin $PATH
 set -gx PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
 set -gx PATH /usr/local/opt/python/libexec/bin $PATH
 set -gx PATH /usr/local/opt/llvm/bin $PATH

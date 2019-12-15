@@ -1,5 +1,4 @@
 call plug#begin('~/.vim/plugged')
-  Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
   Plug 'w0rp/ale'
   Plug 'rizzatti/dash.vim'
   Plug 'soramugi/auto-ctags.vim'
@@ -15,13 +14,18 @@ call plug#begin('~/.vim/plugged')
   Plug 'itchyny/lightline.vim'
   Plug 'maximbaz/lightline-ale'
   Plug 'cocopon/iceberg.vim'
-  Plug 'SirVer/ultisnips'
   Plug 'sheerun/vim-polyglot'
-  Plug 'honza/vim-snippets'
   Plug 'majutsushi/tagbar'
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'prabirshrestha/async.vim'
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  Plug 'prabirshrestha/asyncomplete-tags.vim'
+  Plug 'ryanolsonx/vim-lsp-typescript'
+  Plug 'ryanolsonx/vim-lsp-javascript'
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
 
   " Lazy loading
-  Plug 'othree/javascript-libraries-syntax.vim', {'for': ['javascript', 'javascript.jsx']}
-  Plug 'posva/vim-vue', {'for': 'vue'}
   Plug 'tpope/vim-rails', {'for': 'ruby'}
 call plug#end()

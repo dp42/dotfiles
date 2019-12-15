@@ -34,8 +34,8 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 set softtabstop=2
-set spell
-set spelllang=en,cjk
+" set spell
+" set spelllang=en,cjk
 let g:auto_ctags_tags_args = '--tag-relative=yes --recurse --sort=yes'
 let g:sql_type_default = 'mysql'
 
@@ -107,29 +107,52 @@ colorscheme iceberg
 
 
 "===================================================================
-" CoC
+" vim-lsp
 "===================================================================
-nmap <silent> <leader>h :<C-U>call CocAction('doHover')<CR>
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-" Remap keys for gotos
-nmap <silent> <leader>ld <Plug>(coc-definition)
-nmap <silent> <leader>lt <Plug>(coc-type-definition)
-nmap <silent> <leader>li <Plug>(coc-implementation)
-nmap <silent> <leader>lr <Plug>(coc-references)
+nmap <silent> <leader>h <Plug>(lsp-hover)
+nmap <silent> <leader>ld <Plug>(lsp-definition)
+nmap <silent> <leader>lt <Plug>(lsp-type-definition)
+nmap <silent> <leader>lr <Plug>(lsp-references)
 
+let g:lsp_highlights_enabled = 0
+let g:lsp_textprop_enabled = 0
+let g:lsp_diagnostics_enabled = 0
+
+au User lsp_setup call lsp#register_server({
+    \ 'name': 'intelephense',
+    \ 'cmd': {server_info->['intelephense', '--stdio']},
+    \ 'initialization_options': {},
+    \ 'workspace_config': {'intelephense': {}},
+    \ 'whitelist': ['php'],
+    \ })
+au FileType php setlocal omnifunc=lsp#complete
+
+if executable('solargraph')
+    " gem install solargraph
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'solargraph',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+        \ 'initialization_options': {"diagnostics": "false"},
+        \ 'whitelist': ['ruby'],
+        \ })
+au FileType ruby setlocal omnifunc=lsp#complete
+endif
 
 "===================================================================
 " ALE
 "===================================================================
+nmap <leader>af <Plug>(ale_fix)
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
 let g:ale_set_highlights = 0
 let g:ale_lint_on_enter = 0
 let g:ale_sign_column_always = 1
-let g:ale_sign_error = "X"
-let g:ale_sign_warning = "!"
+let g:ale_sign_error = "E"
+let g:ale_sign_warning = "W"
 let g:ale_linters = {
 \   'ruby': ['ruby', 'rubocop'],
-\   'php': ['php', 'phpcs'],
+\   'php': ['php', 'phpcs', 'phpmd', 'phan'],
 \   'javascript': ['eslint'],
 \   'typescript': ['eslint'],
 \   'vue': ['eslint'],
@@ -138,17 +161,19 @@ let g:ale_linters = {
 \   'scss': ['stylelint']
 \}
 let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'ruby': ['rubocop'],
+\   'php': ['php_cs_fixer'],
 \   'javascript': ['eslint'],
 \   'typescript': ['eslint'],
 \   'vue': ['eslint'],
 \   'go': ['gofmt']
 \}
 let g:ale_php_phpcs_standard = 'PSR2'
+let g:ale_php_phpmd_ruleset = 'cleancode,codesize,design,naming'
+let g:ale_php_cs_fixer_executable = 'php-cs-fixer'
+let g:ale_php_cs_fixer_options = '--config-file=.php_cs'
 let g:ale_go_gometalinter_options = '--fast'
-
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 "===================================================================
 "NERD Tree
