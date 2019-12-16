@@ -3,4 +3,5 @@
 coc/extensions/db.json
 
 # fish shell
+fish/fish_variables
 fishd.*
