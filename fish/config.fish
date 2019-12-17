@@ -29,22 +29,13 @@ set -g theme_display_cmd_duration no
 alias gpl='git pull origin (git rev-parse --abbrev-ref HEAD)'
 alias gps='git push origin (git rev-parse --abbrev-ref HEAD)'
 
-# bobthefish
-set -g theme_display_git_master_branch yes
-
-# powerline
-set fish_function_path $fish_function_path "/usr/local/lib/python3.7/site-packages/powerline/bindings/fish"
-powerline-setup
-
-
 function fish_user_key_bindings
 bind \cs fzf_change_repository
 bind \cr fzf_history
 end
 
-eval (direnv hook fish)
-eval (starship init fish)
 start_tmux
 set -g fish_user_paths "/usr/local/opt/mysql@5.7/bin" $fish_user_paths
 direnv hook fish | source
+starship init fish | source
 
