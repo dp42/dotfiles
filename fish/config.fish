@@ -5,6 +5,7 @@ set -x LC_ALL ja_JP.UTF-8
 
 # PATH
 set -gx PHPBREW_RC_ENABLE 1
+set -gx PATH /usr/local/bin $PATH
 rbenv init - | source
 source $HOME/.phpbrew/phpbrew.fish
 set -gx GOPATH $HOME
