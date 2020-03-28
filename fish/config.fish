@@ -22,9 +22,6 @@ set -gx MANPATH /usr/local/opt/coreutils/libexec/gnuman $MANPATH
 set -gx FZF_DEFAULT_COMMAND 'rg --files -g !.git/ --hidden'
 set -gx FZF_DEFAULT_OPTS '--height 30% --reverse'
 set -gx BAT_CONFIG_PATH $HOME/.config/bat/bat.conf
-set -g theme_display_date no
-set -g theme_nerd_fonts yes
-set -g theme_display_cmd_duration no
 
 #Alias
 alias gpl='git pull origin (git rev-parse --abbrev-ref HEAD)'
