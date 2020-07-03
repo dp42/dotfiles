@@ -220,6 +220,7 @@ nnoremap <silent> <leader>gs :Gstatus<CR><C-w>T
 nnoremap <silent> <leader>ga :Gwrite<CR>
 nnoremap <silent> <leader>gc :Gcommit<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
+let g:github_enterprise_urls = [$GHE_URL]
 
 "===================================================================
 "Lightline.vim

@@ -10,11 +10,11 @@ set -x FZF_DEFAULT_OPTS '--height 30% --reverse'
 set -x BAT_CONFIG_PATH $HOME/.config/bat/bat.conf
 
 # PATH
-rbenv init - | source
+status --is-interactive; and source (rbenv init -|psub)
+status --is-interactive; and source (anyenv init -|psub)
 source $HOME/.phpbrew/phpbrew.fish
 set -gx GOPATH $HOME
 set -gx PATH $HOME/bin $PATH
-set -gx PATH $HOME/.nodebrew/current/bin $PATH
 set -gx PATH $HOME/.composer/vendor/bin $PATH
 set -gx PATH $HOME/.phpbrew/bin $PATH
 set -gx PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
@@ -30,7 +30,6 @@ alias gps='git push origin (git rev-parse --abbrev-ref HEAD)'
 
 # powerline
 set fish_function_path $fish_function_path "/usr/local/lib/python3.7/site-packages/powerline/bindings/fish"
-powerline-setup
 
 function fish_user_key_bindings
 bind \cs fzf_change_repository
