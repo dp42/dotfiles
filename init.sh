@@ -1,6 +1,8 @@
 #!/bin/sh
 ln -nfs ~/src/github.com/dp42/dotfiles/fish $HOME/.config/fish
 ln -nfs ~/src/github.com/dp42/dotfiles/.tmux.conf $HOME/.tmux.conf
+ln -nfs ~/src/github.com/dp42/dotfiles/tmux $HOME/.config/tmux
+ln -nfs ~/src/github.com/dp42/dotfiles/powerline $HOME/.config/powerline
 ln -nfs ~/src/github.com/dp42/dotfiles/.vim $HOME/.vim
 ln -nfs ~/src/github.com/dp42/dotfiles/.tigrc $HOME/.tigrc
 ln -nfs ~/src/github.com/dp42/dotfiles/.editorconfig $HOME/.editorconfig
