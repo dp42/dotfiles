@@ -3,6 +3,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'rizzatti/dash.vim'
   Plug 'soramugi/auto-ctags.vim'
   Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/fzf'
   Plug 'scrooloose/nerdtree'
   Plug 'ryanoasis/vim-devicons'
   Plug 'editorconfig/editorconfig-vim'

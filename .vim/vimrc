@@ -187,7 +187,6 @@ let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 "===================================================================
 " fzf
 "===================================================================
-set rtp+=/usr/local/opt/fzf
 "ファイル検索
 nmap <leader>ff :Files<CR>
 "バッファ検索
@@ -256,8 +255,8 @@ let g:lightline = {
       \   'linter_errors': 'error',
       \   'linter_checking': 'left',
       \ },
-      \ 'separator': { 'left': "\uE0B8", 'right': "\uE0BA" },
-      \ 'subseparator': { 'left': "\uE0B9", 'right': "|" }
+      \ 'separator': { 'left': "", 'right': "" },
+      \ 'subseparator': { 'left': "|", 'right': "|" }
       \ }
 
 
