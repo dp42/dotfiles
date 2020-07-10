@@ -187,7 +187,6 @@ let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 "===================================================================
 " fzf
 "===================================================================
-set rtp+=/usr/local/opt/fzf
 "ファイル検索
 nmap <leader>ff :Files<CR>
 "バッファ検索
@@ -220,7 +219,10 @@ nnoremap <silent> <leader>gs :Gstatus<CR><C-w>T
 nnoremap <silent> <leader>ga :Gwrite<CR>
 nnoremap <silent> <leader>gc :Gcommit<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
-let g:github_enterprise_urls = [$GHE_URL]
+
+if !empty($GHE_URL)
+  let g:github_enterprise_urls = [$GHE_URL]
+endif
 
 "===================================================================
 "Lightline.vim
@@ -238,12 +240,12 @@ let g:lightline = {
       \ 'component': {
       \   'readonly': '%{&filetype=="help"?"":&readonly?"":""}',
       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head") && ""!=fugitive#head()?"\uE0A0 " . fugitive#head():""}'
+      \   'fugitive': '%{exists("*FugitiveHead") && ""!=FugitiveHead()?"\uE0A0 " . FugitiveHead():""}'
       \ },
       \ 'component_visible_condition': {
       \   'readonly': '(&filetype!="help"&& &readonly)',
       \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+      \   'fugitive': '(exists("*FugitiveHead") && ""!=FugitiveHead())'
       \ },
       \ 'component_expand': {
       \   'linter_checking': 'lightline#ale#checking',
@@ -256,8 +258,8 @@ let g:lightline = {
       \   'linter_errors': 'error',
       \   'linter_checking': 'left',
       \ },
-      \ 'separator': { 'left': "\uE0B8", 'right': "\uE0BA" },
-      \ 'subseparator': { 'left': "\uE0B9", 'right': "|" }
+      \ 'separator': { 'left': "", 'right': "" },
+      \ 'subseparator': { 'left': "|", 'right': "|" }
       \ }
 
 

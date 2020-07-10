@@ -3,11 +3,21 @@
     "iceberg:base0" : 235,
     "iceberg:base1" : 252,
     "iceberg:base2" : 242,
-    "iceberg:red" : 203,
-    "iceberg:green" : 150,
-    "iceberg:yellow" : 216,
-    "iceberg:blue" : 110,
-    "iceberg:magenta" : 140,
-    "iceberg:cyan" : 109
+    "iceberg:black":         [234, "161821"],
+    "iceberg:white":         [252, "c6c8d1"],
+    "iceberg:red":           [203, "e27878"],
+    "iceberg:green":         [150, "b4be82"],
+    "iceberg:yellow":        [216, "e2a478"],
+    "iceberg:blue":          [110, "84a0c6"],
+    "iceberg:magenta":       [140, "a093c7"],
+    "iceberg:cyan":          [109, "89b8c2"],
+    "iceberg:brightblack":   [242, "6b7089"],
+    "iceberg:brightwhite":   [252, "d2d4de"],
+    "iceberg:brightred":     [203, "e98989"],
+    "iceberg:brightgreen":   [150, "c0ca8e"],
+    "iceberg:brightyellow":  [216, "e9b189"],
+    "iceberg:brightblue":    [110, "91acd1"],
+    "iceberg:brightmagenta": [140, "ada0d3"],
+    "iceberg:brightcyan":    [109, "95c4ce"]
 	}
 }
