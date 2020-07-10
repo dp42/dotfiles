@@ -32,8 +32,8 @@ end
 eval (starship init fish)
 direnv hook fish | source
 
-if [ $TMUX ]
-  tmux set status 2
-  tmux set status-format[1] (tmux show-options -gqv status-format[0] | sed 's/:window-status-current-format//g' | sed 's/:window-status-format//g')
-  tmux set status-format[0] (tmux show-options -gqv status-format[0] | sed 's/:status-right//g' | sed 's/:status-left//g')
-end
+# if [ $TMUX ]
+#   tmux set status 2
+#   tmux set status-format[1] (tmux show-options -gqv status-format[0] | sed 's/:window-status-current-format//g' | sed 's/:window-status-format//g')
+#   tmux set status-format[0] (tmux show-options -gqv status-format[0] | sed 's/:status-right//g' | sed 's/:status-left//g')
+# end
