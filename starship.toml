@@ -4,6 +4,8 @@ symbol = "COMMAND:"
 disabled = true
 [directory]
 style = "bold blue"
+[battery]
+disabled = true
 [package]
 disabled = true
 [nodejs]
