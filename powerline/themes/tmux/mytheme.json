@@ -1,4 +1,15 @@
 {
+  "term_truecolor": true,
+  "dividers": {
+    "left": {
+      "hard":"",
+      "soft":"|"
+    },
+    "right": {
+      "hard":"",
+      "soft":"|"
+    }
+  },
   "segments": {
     "right": [
       {
@@ -23,6 +34,17 @@
       }
     ],
     "left": [
+      {
+        "draw_hard_divider": false,
+        "draw_soft_divider": false,
+        "function": "powerline.segments.common.bat.battery",
+        "name": "battery",
+        "args": {
+          "format": " BAT {capacity:1.0%} {ac_state}",
+          "offline": "",
+          "online": ""
+        }
+      }
     ]
   }
 }
