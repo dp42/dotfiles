@@ -123,7 +123,7 @@ nmap <silent> <leader>h <Plug>(lsp-hover)
 nmap <silent> <leader>ld <Plug>(lsp-definition)
 nmap <silent> <leader>lt <Plug>(lsp-type-definition)
 nmap <silent> <leader>lr <Plug>(lsp-references)
-inoremap <expr><CR> pumvisible() ? asyncomplete#close_popup() : lexima#expand('<CR>', 'i')
+inoremap <expr><CR> pumvisible() ? asyncomplete#close_popup() : lexima#expand('<LT>CR>', 'i')
 inoremap <expr><C-e> pumvisible() ? asyncomplete#cancel_popup() : "\<C-e>"
 
 let g:lsp_highlights_enabled = 0
