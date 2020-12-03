@@ -4,6 +4,7 @@ function fzf_change_repository
 
   if [ $repository ]
     cd $root_dir/$repository
+    emit fish_postexec
     commandline -f repaint
   else
     commandline ''

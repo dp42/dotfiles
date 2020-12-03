@@ -6,10 +6,18 @@ set -x FZF_DEFAULT_OPTS '--height 30% --reverse'
 set -x BAT_CONFIG_PATH $HOME/.config/bat/bat.conf
 
 # PATH
-set -gx GOPATH $HOME
-set -gx PATH $HOME/bin $PATH
-set -gx PATH $HOME/.anyenv/bin $PATH
-status --is-interactive; and source (anyenv init -|psub)
+if ! [ $TMUX ]
+  set -gx GOPATH $HOME
+  set -gx PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
+  set -gx PATH /usr/local/opt/findutils/libexec/gnubin $PATH
+  set -gx PATH /usr/local/opt/grep/libexec/gnubin $PATH
+  set -gx PATH /usr/local/opt/mysql@5.7/bin $PATH
+  set -gx PATH $HOME/bin $PATH
+  set -gx PATH $HOME/.anyenv/bin $PATH
+  status --is-interactive; and source (anyenv init -|psub)
+  source /Users/koichi/.phpbrew/phpbrew.fish
+end
+
 # Alias
 alias gpl='git pull origin (git rev-parse --abbrev-ref HEAD)'
 alias gps='git push origin (git rev-parse --abbrev-ref HEAD)'
@@ -32,8 +40,4 @@ end
 eval (starship init fish)
 direnv hook fish | source
 
-# if [ $TMUX ]
-#   tmux set status 2
-#   tmux set status-format[1] (tmux show-options -gqv status-format[0] | sed 's/:window-status-current-format//g' | sed 's/:window-status-format//g')
-#   tmux set status-format[0] (tmux show-options -gqv status-format[0] | sed 's/:status-right//g' | sed 's/:status-left//g')
-# end
+start_tmux

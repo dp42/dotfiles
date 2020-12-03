@@ -1,11 +1,10 @@
 call plug#begin('~/.vim/plugged')
-  Plug 'w0rp/ale'
+  Plug 'dense-analysis/ale'
   Plug 'rizzatti/dash.vim'
   Plug 'soramugi/auto-ctags.vim'
   Plug 'junegunn/fzf.vim'
   Plug 'junegunn/fzf'
   Plug 'scrooloose/nerdtree'
-  Plug 'ryanoasis/vim-devicons'
   Plug 'editorconfig/editorconfig-vim'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb'
