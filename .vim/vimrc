@@ -34,8 +34,9 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 set softtabstop=2
-" set spell
-" set spelllang=en,cjk
+set spell
+set spelllang=en,cjk
+set spelloptions=camel
 let g:auto_ctags_tags_args = '--tag-relative=yes --recurse --sort=yes'
 let g:sql_type_default = 'mysql'
 
@@ -65,6 +66,13 @@ map mh <C-w>h
 map mk <C-w>k
 map mj <C-w>j
 map ml <C-w>l
+
+" Command Line Mode
+cnoremap <C-a> <Home>
+cnoremap <C-f> <Right>
+cnoremap <C-b> <Left>
+cnoremap <C-d> <Del>
+cnoremap <C-e> <End>
 
 "===================================================================
 " Search
@@ -181,8 +189,6 @@ let g:ale_go_gometalinter_options = '--fast'
 nnoremap <silent><leader>n :NERDTreeToggle<CR>
 let NERDTreeMapActivateNode='<space>'
 let NERDTreeShowHidden = 1
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-
 
 "===================================================================
 " fzf
