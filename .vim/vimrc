@@ -1,8 +1,8 @@
 "===================================================================
 " Basic Settings
 "===================================================================
-source ~/.vim/plugins.vim
 set nocompatible "vi互換モードを無効化
+source ~/.vim/plugins.vim
 syntax on "シンタックスハイライト有効
 set nofixeol
 set ambiwidth=double
@@ -21,7 +21,8 @@ set noswapfile "swapファイルを作成しない
 set nobackup "バックアップファイルを作成しない
 set notitle
 set noundofile "アンドゥファイルを作成しない"
-set completeopt=menuone "補完の結果をプレビューさせない
+let g:asyncomplete_auto_completeopt = 0
+set completeopt=menuone,noinsert,noselect,popup
 set clipboard=unnamed
 set textwidth=0
 au BufNewFile,BufRead *.vue set filetype=vue
@@ -96,13 +97,9 @@ set list "不可視文字を表示する
 set colorcolumn=80 "80文字目に目印
 set listchars=tab:>-,trail:-,eol:↲ "不可視文字の設定内容
 set cmdheight=2 "コマンド行の高さを2行に設定
-"JSONのダブルクオーテーションマークを表示する
-autocmd Filetype json setl conceallevel=0
+autocmd Filetype json,markdown,csv setl conceallevel=0
 ".jsファイルでもJSXをハイライト
 let g:jsx_ext_required = 0
-"markdownファイルでconceal無効化
-let g:vim_markdown_conceal = 0
-autocmd Filetype markdown setl conceallevel=0
 
 if &term == 'screen-256color'
   let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
@@ -113,6 +110,11 @@ set termguicolors
 set background=dark
 colorscheme iceberg
 
+"===================================================================
+" lexima
+"===================================================================
+let g:lexima_no_default_rules = 1
+call lexima#set_default_rules()
 
 "===================================================================
 " vim-lsp
@@ -121,19 +123,41 @@ nmap <silent> <leader>h <Plug>(lsp-hover)
 nmap <silent> <leader>ld <Plug>(lsp-definition)
 nmap <silent> <leader>lt <Plug>(lsp-type-definition)
 nmap <silent> <leader>lr <Plug>(lsp-references)
+inoremap <expr><CR> pumvisible() ? asyncomplete#close_popup() : lexima#expand('<CR>', 'i')
+inoremap <expr><C-e> pumvisible() ? asyncomplete#cancel_popup() : "\<C-e>"
 
 let g:lsp_highlights_enabled = 0
-let g:lsp_textprop_enabled = 0
 let g:lsp_diagnostics_enabled = 0
 
-au User lsp_setup call lsp#register_server({
-    \ 'name': 'intelephense',
-    \ 'cmd': {server_info->['intelephense', '--stdio']},
-    \ 'initialization_options': {},
-    \ 'workspace_config': {'intelephense': {}},
-    \ 'whitelist': ['php'],
-    \ })
-au FileType php setlocal omnifunc=lsp#complete
+if executable('intelephense')
+  augroup LspPHPIntelephense
+    au!
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'intelephense',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'intelephense --stdio']},
+        \ 'whitelist': ['php'],
+        \ 'initialization_options': {'storagePath': '/tmp/intelephense'},
+        \ 'workspace_config': {
+        \   'intelephense': {
+        \     'files': {
+        \       'maxSize': 1000000,
+        \       'associations': ['*.php', '*.phtml'],
+        \       'exclude': [],
+        \     },
+        \     'completion': {
+        \       'insertUseDeclaration': v:true,
+        \       'fullyQualifyGlobalConstantsAndFunctions': v:false,
+        \       'triggerParameterHints': v:true,
+        \       'maxItems': 100,
+        \     },
+        \     'format': {
+        \       'enable': v:true
+        \     },
+        \   },
+        \ }
+        \})
+  augroup END
+endif
 
 if executable('solargraph')
     " gem install solargraph
@@ -143,8 +167,9 @@ if executable('solargraph')
         \ 'initialization_options': {"diagnostics": "false"},
         \ 'whitelist': ['ruby'],
         \ })
-au FileType ruby setlocal omnifunc=lsp#complete
 endif
+
+autocmd FileType typescript,javascript,ruby,php setlocal omnifunc=lsp#complete
 
 "===================================================================
 " ALE
@@ -295,16 +320,3 @@ augroup PrevimSettings
   autocmd!
   autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 augroup END
-
-
-"===================================================================
-" UltiSnips
-"===================================================================
-let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'Snips']
-let g:UltiSnipsEnableSnipMate = 0
-let g:UltiSnipsExpandTrigger="<c-e>"
-call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-      \ 'name': 'ultisnips',
-      \ 'whitelist': ['*'],
-      \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-      \ }))
