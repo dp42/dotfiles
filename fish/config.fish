@@ -19,8 +19,8 @@ if ! [ $TMUX ]
 end
 
 # Alias
-alias gpl='git pull origin (git rev-parse --abbrev-ref HEAD)'
-alias gps='git push origin (git rev-parse --abbrev-ref HEAD)'
+alias gpull='git pull origin (git rev-parse --abbrev-ref HEAD)'
+alias gpush='git push origin (git rev-parse --abbrev-ref HEAD)'
 
 # Color
 # set -gx fish_color_normal

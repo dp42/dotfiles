@@ -3,7 +3,9 @@
 [ghq]
 	root = ~/src
 [alias]
-  co = checkout
-  cob = checkout -b
+  sw = switch -c
   cam = commit --amend
   delb = branch -D
+[pull]
+	ff = only
+	rebase = false

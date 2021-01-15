@@ -41,6 +41,10 @@ set spelloptions=camel
 let g:auto_ctags_tags_args = '--tag-relative=yes --recurse --sort=yes'
 let g:sql_type_default = 'mysql'
 
+if filereadable(expand('~/vimrc.local'))
+  source ~/vimrc.local
+endif
+
 if !has('nvim')
   packadd matchit
 endif
@@ -251,9 +255,6 @@ nnoremap <silent> <leader>ga :Gwrite<CR>
 nnoremap <silent> <leader>gc :Gcommit<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
 
-if !empty($GHE_URL)
-  let g:github_enterprise_urls = [$GHE_URL]
-endif
 
 "===================================================================
 "Lightline.vim
