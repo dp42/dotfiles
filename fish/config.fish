@@ -15,7 +15,6 @@ if ! [ $TMUX ]
   set -gx PATH $HOME/bin $PATH
   set -gx PATH $HOME/.anyenv/bin $PATH
   status --is-interactive; and source (anyenv init -|psub)
-  source /Users/koichi/.phpbrew/phpbrew.fish
 end
 
 if ! [ $SSH_AUTH_SOCK ]

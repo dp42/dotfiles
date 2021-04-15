@@ -22,8 +22,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'prabirshrestha/vim-lsp'
   Plug 'prabirshrestha/asyncomplete-lsp.vim'
   Plug 'prabirshrestha/asyncomplete-tags.vim'
-  Plug 'ryanolsonx/vim-lsp-typescript'
-  Plug 'ryanolsonx/vim-lsp-javascript'
 
   " Lazy loading
   Plug 'tpope/vim-rails', {'for': 'ruby'}
