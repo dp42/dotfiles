@@ -18,6 +18,10 @@ if ! [ $TMUX ]
   source /Users/koichi/.phpbrew/phpbrew.fish
 end
 
+if ! [ $SSH_AUTH_SOCK ]
+  set -x SSH_AUTH_SOCK (ps -ef -E | grep ssh-agent | awk  'NR==1 && /SSH_AUTH_SOCK/{ print  }' | sed 's/^.*SSH_AUTH_SOCK=\([^ ]*\).*/\1/')
+end
+
 # Alias
 alias gpull='git pull origin (git rev-parse --abbrev-ref HEAD)'
 alias gpush='git push origin (git rev-parse --abbrev-ref HEAD)'
