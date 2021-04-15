@@ -3,3 +3,5 @@
 --exclude=vendor
 --exclude=bundles
 --exclude=coverage
+--exclude=tests
+--exclude=spec
