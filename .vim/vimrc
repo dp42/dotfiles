@@ -268,10 +268,30 @@ command! -bang -nargs=? -complete=dir Files
 "===================================================================
 "fugitive.vim
 "===================================================================
-nnoremap <silent> <leader>gs :Gstatus<CR><C-w>T
+" delete deprecated commands
+augroup DeleteDeprecatedFugitiveCommand
+  autocmd!
+  autocmd VimEnter * delcommand Gremove
+  autocmd VimEnter * delcommand Gdelete
+  autocmd VimEnter * delcommand Gmove
+  autocmd VimEnter * delcommand Grename
+  autocmd VimEnter * delcommand Gbrowse
+  autocmd VimEnter * delcommand Gblame
+  autocmd VimEnter * delcommand Gcommit
+  autocmd VimEnter * delcommand Gmerge
+  autocmd VimEnter * delcommand Gpull
+  autocmd VimEnter * delcommand Grebase
+  autocmd VimEnter * delcommand Grevert
+  autocmd VimEnter * delcommand Gpush
+  autocmd VimEnter * delcommand Gfetch
+  autocmd VimEnter * delcommand Glog
+  autocmd VimEnter * delcommand Gstatus
+augroup END
+
+nnoremap <silent> <leader>gs :G<CR>
 nnoremap <silent> <leader>ga :Gwrite<CR>
-nnoremap <silent> <leader>gc :Gcommit<CR>
-nnoremap <silent> <leader>gd :Gdiff<CR>
+nnoremap <silent> <leader>gc :G commit<CR>
+nnoremap <silent> <leader>gd :Gdiffsplit<CR>
 
 
 "===================================================================
