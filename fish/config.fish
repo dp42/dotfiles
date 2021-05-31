@@ -1,5 +1,4 @@
 # ENV
-set -gx SHELL (which fish)
 set -gx EDITOR vim
 set -x FZF_DEFAULT_COMMAND 'rg --files -g !.git/ --hidden'
 set -x FZF_DEFAULT_OPTS '--height 30% --reverse'
