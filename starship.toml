@@ -1,5 +1,5 @@
 [character]
-symbol = "COMMAND:"
+success_symbol = "COMMAND:"
 [cmd_duration]
 disabled = true
 [directory]

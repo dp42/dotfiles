@@ -6,3 +6,4 @@ coc/extensions/db.json
 fishd.*
 __*.fish
 fish_variables
+fish/con.d/

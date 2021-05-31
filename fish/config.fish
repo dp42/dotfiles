@@ -1,5 +1,5 @@
 # ENV
-set -gx SHELL (which fish)
+# set -gx SHELL (which fish)
 set -gx EDITOR vim
 set -x FZF_DEFAULT_COMMAND 'rg --files -g !.git/ --hidden'
 set -x FZF_DEFAULT_OPTS '--height 30% --reverse'
@@ -14,6 +14,8 @@ if ! [ $TMUX ]
   set -gx PATH /usr/local/opt/mysql@5.7/bin $PATH
   set -gx PATH $HOME/bin $PATH
   set -gx PATH $HOME/.anyenv/bin $PATH
+  set -gx PATH /opt/homebrew/bin $PATH
+
   status --is-interactive; and source (anyenv init -|psub)
 end
 

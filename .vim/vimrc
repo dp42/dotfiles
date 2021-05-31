@@ -57,7 +57,7 @@ let mapleader="\<Space>"
 " ESCでターミナル終了
 tnoremap <ESC> <C-W>:q!<CR>
 "ESCで検索ハイライトを消す
-nnoremap  <silent> <Esc> :nohlsearch<CR><Esc>
+nnoremap  <silent> <Esc><Esc> :nohlsearch<CR><Esc>
 "タグジャンプの候補が複数ある場合はリストを出す
 nnoremap <C-]> g<C-]>
 "xで削除した文字をヤンクしない
@@ -89,7 +89,6 @@ set incsearch "インクリメンタルサーチを有効化
 set hlsearch "検索結果をハイライト
 set wrapscan "最後まで検索したら一番上に戻る
 set showcmd "入力中のコマンドを最下行に表示
-
 
 "===================================================================
 " Appearance
