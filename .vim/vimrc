@@ -38,6 +38,7 @@ set softtabstop=2
 set spell
 set spelllang=en,cjk
 set spelloptions=camel
+set autoread
 let g:auto_ctags_tags_args = '--tag-relative=yes --recurse --sort=yes'
 let g:sql_type_default = 'mysql'
 
@@ -248,6 +249,14 @@ nmap <leader>fr :Rg<CR>
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --line-number --no-heading --color=auto --smart-case '.shellescape(<q-args>),
+  \   0,
+  \   fzf#vim#with_preview({'options': '-e --delimiter : --nth 3..'}, 'right:60%'),
+  \   <bang>0)
+
+" Rg with preview
+command! -bang -nargs=* Rge
+  \ call fzf#vim#grep(
+  \   'rg -E euc-jp --line-number --no-heading --color=auto --smart-case '.shellescape(<q-args>),
   \   0,
   \   fzf#vim#with_preview({'options': '-e --delimiter : --nth 3..'}, 'right:60%'),
   \   <bang>0)

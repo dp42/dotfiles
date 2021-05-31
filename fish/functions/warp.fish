@@ -3,6 +3,7 @@ function warp
 
   if [ $dest ]
     cd $dest
+    commandline -f repaint
   else
     commandline ''
   end

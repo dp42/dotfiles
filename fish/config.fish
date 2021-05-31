@@ -38,6 +38,7 @@ set fish_color_comment black --bold
 function fish_user_key_bindings
 bind \cs fzf_change_repository
 bind \cr fzf_history
+bind \cw warp
 end
 
 eval (starship init fish)
