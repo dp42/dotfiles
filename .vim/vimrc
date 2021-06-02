@@ -194,7 +194,7 @@ if executable('typescript-language-server')
         \ })
 endif
 
-autocmd FileType typescript,javascript,ruby,php setlocal omnifunc=lsp#complete
+autocmd FileType typescript,javascript,ruby,php,go setlocal omnifunc=lsp#complete
 
 "===================================================================
 " ALE
