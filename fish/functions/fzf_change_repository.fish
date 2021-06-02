@@ -8,5 +8,6 @@ function fzf_change_repository
     commandline -f repaint
   else
     commandline ''
+    commandline -f repaint
   end
 end

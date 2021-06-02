@@ -6,5 +6,6 @@ function warp
     commandline -f repaint
   else
     commandline ''
+    commandline -f repaint
   end
 end

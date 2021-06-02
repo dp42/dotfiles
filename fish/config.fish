@@ -3,6 +3,7 @@ set -gx EDITOR vim
 set -x FZF_DEFAULT_COMMAND 'rg --files -g !.git/ --hidden'
 set -x FZF_DEFAULT_OPTS '--height 30% --reverse'
 set -x BAT_CONFIG_PATH $HOME/.config/bat/bat.conf
+set -x INTELEPHENSE_PHP_VERSION 8.0.6
 
 # PATH
 if ! [ $TMUX ]
@@ -44,5 +45,4 @@ end
 
 eval (starship init fish)
 direnv hook fish | source
-
 start_tmux

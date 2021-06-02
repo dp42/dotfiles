@@ -22,7 +22,7 @@ set nobackup "バックアップファイルを作成しない
 set notitle
 set noundofile "アンドゥファイルを作成しない"
 let g:asyncomplete_auto_completeopt = 0
-set completeopt=menuone,noinsert,noselect,popup
+set completeopt=menuone,noinsert,noselect
 set clipboard=unnamed
 set textwidth=0
 au BufNewFile,BufRead *.vue set filetype=vue
@@ -37,7 +37,6 @@ set expandtab
 set softtabstop=2
 set spell
 set spelllang=en,cjk
-set spelloptions=camel
 set autoread
 let g:auto_ctags_tags_args = '--tag-relative=yes --recurse --sort=yes'
 let g:sql_type_default = 'mysql'
@@ -47,6 +46,7 @@ if filereadable(expand('~/vimrc.local'))
 endif
 
 if !has('nvim')
+  set spelloptions=camel
   packadd matchit
 endif
 
@@ -98,13 +98,13 @@ set number "行番号を表示
 set ruler "ルーラー表示
 set laststatus=2 "ステータスラインを常に表示
 set list "不可視文字を表示する
-set colorcolumn=80 "80文字目に目印
 set listchars=tab:>-,trail:-,eol:↲ "不可視文字の設定内容
 set cmdheight=2 "コマンド行の高さを2行に設定
 autocmd Filetype json,markdown,csv setl conceallevel=0
 ".jsファイルでもJSXをハイライト
 let g:jsx_ext_required = 0
 
+" for tmux
 if &term == 'screen-256color'
   let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
   let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
@@ -123,15 +123,24 @@ call lexima#set_default_rules()
 "===================================================================
 " vim-lsp
 "===================================================================
-nmap <silent> <leader>h <Plug>(lsp-hover)
+let g:lsp_diagnostics_enabled = 0
+
+nmap <silent> <leader>lh <Plug>(lsp-hover)
 nmap <silent> <leader>ld <Plug>(lsp-definition)
 nmap <silent> <leader>lt <Plug>(lsp-type-definition)
 nmap <silent> <leader>lr <Plug>(lsp-references)
 inoremap <expr><CR> pumvisible() ? asyncomplete#close_popup() : lexima#expand('<LT>CR>', 'i')
 inoremap <expr><C-e> pumvisible() ? asyncomplete#cancel_popup() : "\<C-e>"
 
-let g:lsp_highlights_enabled = 0
-let g:lsp_diagnostics_enabled = 0
+
+if executable('gopls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'gopls',
+        \ 'cmd': {server_info->['gopls']},
+        \ 'whitelist': ['go'],
+        \ })
+    autocmd BufWritePre *.go LspDocumentFormatSync
+endif
 
 if executable('intelephense')
   augroup LspPHPIntelephense
@@ -156,6 +165,9 @@ if executable('intelephense')
         \     },
         \     'format': {
         \       'enable': v:true
+        \     },
+        \     'environment': {
+        \       'phpVersion': $INTELEPHENSE_PHP_VERSION
         \     },
         \   },
         \ }
@@ -202,7 +214,7 @@ let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'typescript': ['eslint'],
 \   'vue': ['eslint'],
-\   'go': ['gometalinter', 'gofmt'],
+\   'go': ['gofmt'],
 \   'css': ['stylelint'],
 \   'scss': ['stylelint']
 \}
@@ -239,8 +251,6 @@ nmap <leader>fb :Buffers<CR>
 nmap <leader>ft :Tags<CR>
 "ファイル履歴検索
 nmap <leader>fh :History<CR>
-"コマンド履歴検索
-nmap <leader>fc :History:<CR>
 "Rg
 nmap <leader>fr :Rg<CR>
 
@@ -353,8 +363,3 @@ let g:sql_type_default = 'mysql'
 " Markdown
 "===================================================================
 let g:vim_markdown_folding_disabled = 1
-let g:previm_open_cmd = "open -a \"Google Chrome\""
-augroup PrevimSettings
-  autocmd!
-  autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
-augroup END

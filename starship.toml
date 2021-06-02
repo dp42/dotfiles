@@ -1,9 +1,11 @@
 [character]
 success_symbol = "COMMAND:"
+error_symbol = "[COMMAND:](red)"
 [cmd_duration]
 disabled = true
 [directory]
 style = "bold blue"
+truncate_to_repo = false
 [battery]
 disabled = true
 [package]

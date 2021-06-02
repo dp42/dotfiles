@@ -6,7 +6,7 @@ node_modules/
 misc/vhost.d/default.conf
 coverage/
 .solargraph.yml
-rails-solargraph.rb
+rails_solargraph.rb
 .bundle/config
 .yardoc/
 
