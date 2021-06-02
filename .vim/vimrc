@@ -111,8 +111,12 @@ if &term == 'screen-256color'
 endif
 
 set termguicolors
-set background=dark
 colorscheme iceberg
+highlight Normal ctermbg=none guibg=NONE
+highlight NonText ctermbg=none guibg=NONE
+highlight LineNr ctermbg=none guibg=NONE
+highlight Folded ctermbg=none guibg=NONE
+highlight EndOfBuffer ctermbg=none guibg=NONE
 
 "===================================================================
 " lexima
